@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北海道 8 日自駕 + 鐵道美食手札 🍁</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-stone-100 text-stone-800 pb-20 font-sans">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const IconWrapper = ({ children, className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {children}
+      </svg>
+    );
+
+    const HotelIcon = (props) => <IconWrapper {...props}><path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/><polyline points="6 12 18 12"/><polyline points="6 8 18 8"/><polyline points="6 16 18 16"/></IconWrapper>;
+    const FoodIcon = (props) => <IconWrapper {...props}><path d="M18 2v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V2"/><path d="M12 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Z"/></IconWrapper>;
+    const CameraIcon = (props) => <IconWrapper {...props}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></IconWrapper>;
+    const ShoppingIcon = (props) => <IconWrapper {...props}><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></IconWrapper>;
+    const CarIcon = (props) => <IconWrapper {...props}><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></IconWrapper>;
+    const TrainIcon = (props) => <IconWrapper {...props}><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-3 3"/><path d="m16 19 3 3"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></IconWrapper>;
+    const BusIcon = (props) => <IconWrapper {...props}><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4C2.9 6 1.9 6.8 1.6 7.8L.2 12.8c-.1.4-.2.8-.2 1.2 0 .4.1.8.2 1.2C.5 16.3 1 18 1 18h3"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="18" r="2.5"/></IconWrapper>;
+    const PlaneIcon = (props) => <IconWrapper {...props}><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.7 5.2c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/></IconWrapper>;
+    const NavIcon = (props) => <IconWrapper {...props}><polygon points="3 11 22 2 13 21 11 13 3 11"/></IconWrapper>;
+    const ClockIcon = (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconWrapper>;
+    const SparklesIcon = (props) => <IconWrapper {...props}><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></IconWrapper>;
+    const HelpIcon = (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></IconWrapper>;
+
+    const INITIAL_SCHEDULE = [
+      {
+        day: 1,
+        date: "2026/10/18 (週日)",
+        title: "抵達北海道 ‧ 酷航 TR892 ✈️ 湯咖哩初體驗",
+        hotel: "VESSEL INN 札幌中島公園",
+        spots: [
+          { 
+            id: "1-1", time: "11:00", stay: "06:55", name: "桃園國際機場 T1 ✈️ 新千歲國際機場", category: "airport", 
+            hours: "酷航 TR892 (B787-9) 13:00 起飛 ✈️ 17:55 抵達", 
+            image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+            desc: "搭乘酷航 TR892 班機直飛北海道新千歲國際機場，預計 17:55 降落並辦理入境及提領行李。",
+            notes: "【航班資訊】酷航 TR892 (B787-9) | 13:00 桃園 T1 起飛 ➡️ 17:55 抵達新千歲國際機場 | 請於 11:00 前抵達櫃檯辦理報到與托運", 
+            transit: { type: "train", duration: "00時10分" } 
+          },
+          { 
+            id: "1-2", time: "18:30", stay: "00:50", name: "新千歲機場 ➡️ JR 快速 AirPort ➡️ 地下鐵南北線 (前往飯店)", category: "train", 
+            hours: "JR 列車每 12 分鐘一班 (JR 約 37 分 + 地下鐵約 6 分)", 
+            image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
+            desc: "入境後順指標至國內線 B1F 搭乘 JR 快速 AirPort 列車至「札幌站」，轉乘地下鐵南北線（往真駒內方向）至「中島公園站」(N09) 2 號出口，步行 1 分鐘即達飯店。",
+            notes: "【搭乘路線指引】1. 新千歲機場 B1F 搭乘 JR 快速 AirPort ➡️ 札幌站 (約 37 分) | 2. 轉乘地下鐵南北線 ➡️ 中島公園站 (約 6 分) | 3. 2 號出口出站步行 1 分鐘即達 VESSEL INN", 
+            transit: { type: "foot", duration: "00時05分" } 
+          },
+          { 
+            id: "1-3", time: "19:30", stay: "00:45", name: "VESSEL INN 札幌中島公園 (Check-in)", category: "hotel", 
+            hours: "櫃檯 24 小時服務 (Check-in 14:00 後)", 
+            image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+            desc: "辦理 Check-in 入住大通/中島公園旁高評價質感飯店。",
+            notes: "【飯店特色】榮獲全日本飯店早餐評比前列！明早可享用澎湃的生魚片勝手丼吃到飽。", transit: { type: "foot", duration: "00時10分" } 
+          },
+          { 
+            id: "1-4", time: "20:30", stay: "01:30", name: "SHO-RIN 札幌薄野總店 / GARAKU (晚餐)", category: "food", 
+            hours: "17:00 - 03:00 (L.O. 02:30)", 
+            image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+            desc: "薄野地道老牌湯咖哩！香醇濃郁的十幾種辛香料湯底配上酥炸雞腿與在地季節野菜。",
+            notes: "【必點美味】經典慢燉雞腿湯咖哩、野菜盛合湯咖哩、辣度 3~5 號最推！", transit: null 
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "2026/10/19 (週一)",
+        title: "美瑛美景與甜點一日遊 ‧ 全程自駕",
+        hotel: "VESSEL INN 札幌中島公園",
+        spots: [
+          { 
+            id: "2-1", time: "08:00", stay: "00:30", name: "Toyota Rent a Car 札幌站前店 (取車)", category: "car", 
+            hours: "08:00 - 20:00", 
+            image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
+            desc: "辦理取車手續，開啟美瑛一日自駕之旅，經道央自動車道往美瑛開去。",
+            notes: "【自駕提醒】租借 ETC 卡與 HEP (Hokkaido Expressway Pass)，經高速公路單程約 2.5 小時。", transit: { type: "car", duration: "02時30分" } 
+          },
+          { 
+            id: "2-2", time: "11:00", stay: "00:40", name: "美瑛拼布之路 (Patchwork Road)", category: "sightseeing", 
+            hours: "戶外開放景點 (建議白天前往)", 
+            image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+            desc: "開車穿梭於美瑛波浪狀丘陵，欣賞 Ken & Mary 之樹與 Seven Star 之樹深秋大地景色。",
+            notes: "【打卡景點】Ken & Mary 之樹、Seven Star 之樹、親親子之樹", transit: { type: "car", duration: "00時20分" } 
+          },
+          { 
+            id: "2-3", time: "12:00", stay: "01:00", name: "美瑛放牧酪農場 (Biei Farm)", category: "food", 
+            hours: "10:00 - 16:00 (週二定休)", 
+            image: "https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=800&q=80",
+            desc: "在極度開闊的丘陵牧場看放牧牛群，享用全日本頂級的現擠牛奶霜淇淋與鮮乳。",
+            notes: "【必吃推薦】純鮮奶霜淇淋、低溫殺菌鮮乳、手工起司可麗餅", transit: { type: "car", duration: "00時15分" } 
+          },
+          { 
+            id: "2-4", time: "13:15", stay: "01:00", name: "Blanc Rouge (ブラン・ルージュ) 午餐", category: "food", 
+            hours: "11:00 - 15:00 (週四定休)", 
+            image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+            desc: "隱藏在美瑛森林裡的溫馨木屋餐廳，招牌紅酒燉牛肉濃郁軟嫩。",
+            notes: "【必點招牌】紅酒燉牛肉套餐 (Beef Stew)、特製手作木屋下午茶蛋糕", transit: { type: "car", duration: "00時20分" } 
+          },
+          { 
+            id: "2-5", time: "14:35", stay: "00:45", name: "白金青池 (Shiroi Koibito Pond)", category: "sightseeing", 
+            hours: "24 小時開放 (建議 16:30 前參觀)", 
+            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+            desc: "欣賞深秋冷冽清澈的寶藍色池水與落葉松枯木倒影，呈現極具神秘感的絕美奇景。",
+            notes: "【貼心提醒】園區附設大型收費停車場 (500日圓)", transit: { type: "car", duration: "00時20分" } 
+          },
+          { 
+            id: "2-6", time: "15:40", stay: "00:45", name: "四季彩之丘 (Shikisai no Oka)", category: "sightseeing", 
+            hours: "08:40 - 17:00", 
+            image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+            desc: "搭乘拖拉機遊園車巡禮秋季丘陵線條，並可進園與超萌羊駝（草泥馬）互動餵食。",
+            notes: "【體驗推薦】拖拉機遊園車、草泥馬牧場餵食區、現炸男爵馬鈴薯餅", transit: { type: "car", duration: "00時15分" } 
+          },
+          { 
+            id: "2-7", time: "16:40", stay: "00:30", name: "道之驛美瑛「丘之藏」", category: "shopping", 
+            hours: "09:00 - 17:00", 
+            image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+            desc: "舊軟石倉庫改建的在地道之驛，採買美瑛限定農特產與質感手作伴手禮。",
+            notes: "【必買伴手禮】美瑛限定玉米餅乾、手工木雕製品、美瑛牛乳餅", transit: { type: "car", duration: "02時30分" } 
+          },
+          { 
+            id: "2-8", time: "19:40", stay: "00:20", name: "Toyota Rent a Car 札幌站前店 (還車)", category: "car", 
+            hours: "08:00 - 20:00", 
+            image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
+            desc: "於還車店附近加油站加滿油後辦理歸還，步行返回大通/薄野區。",
+            notes: "【歸還提醒】請務必於 20:00 前加滿油返還車輛。", transit: null 
+          }
+        ]
+      },
+      {
+        day: 3,
+        date: "2026/10/20 (週二)",
+        title: "小樽浪漫港都 ‧ 音樂盒堂、運河與天狗山夜景",
+        hotel: "VESSEL INN 札幌中島公園",
+        spots: [
+          { 
+            id: "3-1", time: "09:10", stay: "00:45", name: "札幌站 ➡️ 搭乘 JR 快速 AirPort ➡️ 南小樽站", category: "train", 
+            hours: "JR 快速 AirPort 每 12 分鐘一班", 
+            image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
+            desc: "從札幌站搭乘 JR 快速列車直達「南小樽站」，從此站下車沿著下坡路往小樽運河方向散步最輕鬆。",
+            notes: "【JR 快速 AirPort 班次】建議班次：09:18 | 替代班次：09:06、09:30、09:42（每 12 分鐘一班）", transit: { type: "foot", duration: "00時10分" } 
+          },
+          { 
+            id: "3-2", time: "10:15", stay: "02:15", name: "小樽音樂盒堂 & 童話十字路口 (堺町通)", category: "sightseeing", 
+            hours: "09:00 - 18:00", 
+            image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80",
+            desc: "欣賞音樂盒堂門口蒸汽鐘報時，漫步堺町通品嚐北菓樓大泡芙、六花亭與 LeTAO 雙層乳酪蛋糕。",
+            notes: "【甜點名店必吃】1. 北菓樓「夢不思議大泡芙」 / 2. LeTAO 總店現做「雙層乳酪蛋糕」 / 3. 六花亭葡萄夾心餅", transit: { type: "foot", duration: "00時15分" } 
+          },
+          { 
+            id: "3-3", time: "12:30", stay: "01:30", name: "小樽壽司通 (政壽司 / 旭壽司)", category: "food", 
+            hours: "11:00 - 15:00 / 17:00 - 21:00 (週三定休)", 
+            image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80",
+            desc: "享用正宗小樽名店海鮮丼與極上手握壽司，牡丹蝦、干貝與海膽鮮度爆表。",
+            notes: "【必點美味】特選政壽司盛合、極上海鮮丼、現握海膽與炙燒鮭魚脂壽司", transit: { type: "foot", duration: "00時15分" } 
+          },
+          { 
+            id: "3-4", time: "14:00", stay: "02:00", name: "小樽運河 & 出拔小路", category: "sightseeing", 
+            hours: "戶外全天開放", 
+            image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80",
+            desc: "沿著經典的小樽運河石造倉庫群散步拍照，旁邊的出拔小路可品嚐哈密瓜霜淇淋與章魚燒。",
+            notes: "【必拍角點】小樽運河淺草橋鏡面倒影、出拔小路展望塔", transit: { type: "bus", duration: "00時20分" } 
+          },
+          { 
+            id: "3-5", time: "16:15", stay: "01:45", name: "小樽天狗山纜車 (北海道三大夜景)", category: "sightseeing", 
+            hours: "09:00 - 21:00 (纜車每 12 分鐘一班)", 
+            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+            desc: "從小樽站搭乘中央巴士前往天狗山，搭纜車直達山頂俯瞰小樽港夕陽與璀璨夜景。",
+            notes: "【公車班次】小樽站前 9 號月台搭乘中央巴士 9 號線 (車程 20 分鐘，約每 20 分鐘一班)", transit: { type: "train", duration: "00時45分" } 
+          },
+          { 
+            id: "3-6", time: "18:30", stay: "01:30", name: "小樽站 ➡️ 返回札幌站 / 根室花丸迴轉壽司 (晚餐)", category: "food", 
+            hours: "11:00 - 22:00", 
+            image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
+            desc: "搭乘 JR 快速 AirPort 返回札幌，至 JR Tower 享用超人氣根室花丸迴轉壽司。",
+            notes: "【美食推薦】根室花丸迴轉壽司（建議一回札幌站立刻先抽號碼牌）", transit: null 
+          }
+        ]
+      },
+      {
+        day: 4,
+        date: "2026/10/21 (週三)",
+        title: "豐平峽水壩 ‧ 中山峠名物與乃之風湖景溫泉",
+        hotel: "湖景TOYA乃之風渡假酒店",
+        spots: [
+          { 
+            id: "4-1", time: "08:30", stay: "00:30", name: "Toyota Rent a Car 札幌站前店 (取車)", category: "car", 
+            hours: "08:00 - 20:00", 
+            image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
+            desc: "辦理取車手續，開啟兩日定山溪與洞爺湖自駕之旅。",
+            notes: "【自駕提醒】租借 ETC 卡，先往南開往定山溪與豐平峽方向。", transit: { type: "car", duration: "00時50分" } 
+          },
+          { 
+            id: "4-2", time: "09:30", stay: "02:00", name: "定山溪水壩 & 定山湖 豐平峽水壩", category: "sightseeing", 
+            hours: "08:45 - 16:00 (電氣巴士營運時間)", 
+            image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+            desc: "直奔定山溪山區的豐平峽水壩，搭乘無污染電氣巴士前往水壩頂端，欣賞定山湖與壯麗溪谷深秋景色。",
+            notes: "【必遊亮點】搭乘混合動力電氣巴士、水壩觀景台展望台俯瞰定山湖", transit: { type: "car", duration: "00時45分" } 
+          },
+          { 
+            id: "4-3", time: "12:30", stay: "01:00", name: "中山峠道之驛 (必吃：峠のあげ芋 炸馬鈴薯球)", category: "food", 
+            hours: "08:30 - 17:30", 
+            image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",
+            desc: "前往洞爺湖必經的中繼站！享用全北海道銷售第一名、外酥內軟甜甜的「峠のあげ芋」（炸馬鈴薯球）。",
+            notes: "【必吃名物】峠のあげ芋 (一串三個，外皮甜酥、羊蹄山馬鈴薯極度綿密！)", transit: { type: "car", duration: "01時00分" } 
+          },
+          { 
+            id: "4-4", time: "14:30", stay: "01:00", name: "洞爺湖筒倉展望台 (Silo Observatory)", category: "sightseeing", 
+            hours: "08:30 - 18:00", 
+            image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+            desc: "位於洞爺湖西岸高地，一覽洞爺湖全景、中島、有珠山與昭和新山的絶佳展望點。",
+            notes: "【必買必吃】北海道純鮮奶優格、筒倉展望台限定特製牛奶泡芙", transit: { type: "car", duration: "00時20分" } 
+          },
+          { 
+            id: "4-5", time: "15:30", stay: "04:00", name: "湖景TOYA乃之風渡假酒店 (Check-in & 晚餐)", category: "hotel", 
+            hours: "Check-in 15:00 後", 
+            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+            desc: "入住洞爺湖頂級湖景飯店！全房型面湖，享受頂樓露天天空溫泉與精緻的波浪 Buffet 晚餐。",
+            notes: "【飯店饗宴】全房型面湖景觀、頂樓天空露天風呂、豪華自助百匯晚餐", transit: null 
+          }
+        ]
+      },
+      {
+        day: 5,
+        date: "2026/10/22 (週四)",
+        title: "Lake Hill Farm ‧ 餐廳かわなみ ‧ 登別地獄谷與藻岩山寶石夜景",
+        hotel: "Sapporo View Hotel Odori Park",
+        spots: [
+          { 
+            id: "5-1", time: "09:30", stay: "01:00", name: "乃之風退房 ➡️ Lake Hill Farm", category: "food", 
+            hours: "09:00 - 17:00", 
+            image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80",
+            desc: "乃之風退房後開車 10 分鐘即達，在開闊的草坪咖啡廳享用純鮮奶義式冰淇淋 (Gelato) 與泡芙。",
+            notes: "【必點甜點】純鮮奶 Gelato (雙球：牛奶 + 抹茶/藍莓)、現烘泡芙", transit: { type: "car", duration: "00時30分" } 
+          },
+          { 
+            id: "5-2", time: "11:30", stay: "01:15", name: "レストランかわなみ (壯瞥町手打漢堡排午餐)", category: "food", 
+            hours: "11:30 - 14:30 (週四營業，偶有不定期休)", 
+            image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+            desc: "壯瞥町在地人氣老牌洋食館！11:30 開門當第一批客人，享受肉汁爆滿的手打漢堡排與厚切豬排飯。",
+            notes: "【必點名菜】特製招牌手打漢堡排套餐、日式厚切豬排飯、醬油拉麵", transit: { type: "car", duration: "00時45分" } 
+          },
+          { 
+            id: "5-3", time: "13:30", stay: "01:10", name: "登別地獄谷 & 大湯沼天然足湯", category: "sightseeing", 
+            hours: "全天開放", 
+            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+            desc: "沿著木棧道欣賞寸草不生、煙霧繚繞的登別火山谷地地形，可至大湯沼享受天然溫泉足湯。",
+            notes: "【建議路線】地獄谷展望台 ➡️ 鐵泉池 ➡️ 大湯沼川天然足湯 (記得帶小毛巾擦腳)", transit: { type: "car", duration: "01時40分" } 
+          },
+          { 
+            id: "5-4", time: "16:30", stay: "01:15", name: "藻岩山纜車 (賞日落與日本新三大夜景)", category: "sightseeing", 
+            hours: "10:30 - 22:00 (最後上山 21:30)", 
+            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+            desc: "走高速公路直奔札幌藻岩山，搭纜車登頂捕捉黃昏 Magic Hour 與剛點燈的「札幌寶石盒」夜景。",
+            notes: "【保暖提醒】山頂風大氣溫逼近 0 度，請務必攜帶厚外套與圍巾！", transit: { type: "car", duration: "00時30分" } 
+          },
+          { 
+            id: "5-5", time: "18:45", stay: "00:15", name: "Toyota Rent a Car 札幌站前店 (加滿油還車)", category: "car", 
+            hours: "08:00 - 20:00", 
+            image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
+            desc: "在還車店附近加油站加滿油後於 19:00 前完成還車，步行至 Sapporo View Hotel。",
+            notes: "【還車提醒】請於 19:00 前完成車輛歸還。", transit: { type: "foot", duration: "00時10分" } 
+          },
+          { 
+            id: "5-6", time: "19:30", stay: "01:00", name: "Sapporo View Hotel Odori Park (Check-in)", category: "hotel", 
+            hours: "櫃檯 24 小時", 
+            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+            desc: "辦理 Check-in 入住大通公園第一排景觀飯店，地理位置極為優越。",
+            notes: "臨近大通公園與狸小路商圈，入住後可輕鬆步行出門享用晚餐。", transit: { type: "foot", duration: "00時10分" } 
+          },
+          { 
+            id: "5-7", time: "20:30", stay: "01:00", name: "札幌拉麵名店 / 串鳥居酒屋 (晚餐)", category: "food", 
+            hours: "18:00 - 02:00 (依店家而異)", 
+            image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+            desc: "返還車輛後輕鬆享用熱騰騰的札幌濃郁味噌拉麵或在地平價烤肉居酒屋！",
+            notes: "【推薦美食】1. 信玄拉麵 (信州濃味噌拉麵) / 2. 麵屋空 (Sora) / 3. 北海道平價燒鳥連鎖「串鳥」", transit: null 
+          }
+        ]
+      },
+      {
+        day: 6,
+        date: "2026/10/23 (週五)",
+        title: "札幌經典歷史、神宮、甜點與烤肉巡禮",
+        hotel: "Sapporo View Hotel Odori Park",
+        spots: [
+          { 
+            id: "6-1", time: "09:30", stay: "01:30", name: "北海道神宮 & 六花亭神宮茶屋", category: "sightseeing", 
+            hours: "神宮 06:00 - 16:00; 六花亭茶屋 09:00 - 16:00", 
+            image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80",
+            desc: "參拜幽靜的北海道第一大神宮，並至神宮內隱藏版「六花亭神宮茶屋」享用現場現烤的熱騰騰紅豆年糕「判官樣」。",
+            notes: "【必吃特色美食】六花亭神宮茶屋限定「判官樣 (判官さま)」現烤蕎麥紅豆餅 (外酥內軟軟糯！)", transit: { type: "bus", duration: "00時20分" } 
+          },
+          { 
+            id: "6-2", time: "11:30", stay: "01:30", name: "二條市場 (大磯 / どんぶり茶屋)", category: "food", 
+            hours: "07:30 - 15:30 / 17:00 - 21:00 (週三定休)", 
+            image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
+            desc: "札幌市區百年歷史海鮮市場！直送澎湃生魚片、滿滿溢出的鮭魚卵、牡丹蝦與海膽豪華海鮮丼，鮮度爆表。",
+            notes: "【必點】三色海鮮丼（海膽 + 鮭魚卵 + 干貝）、現烤帝王蟹腳/牡丹蝦", transit: { type: "bus", duration: "00時25分" } 
+          },
+          { 
+            id: "6-3", time: "13:30", stay: "02:30", name: "白色戀人公園 (Shiroi Koibito Park)", category: "sightseeing", 
+            hours: "10:00 - 17:00 (最後入場 16:00)", 
+            image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80",
+            desc: "歐式城堡工廠體驗 DIY 餅乾，拍照參觀萬聖節與秋季主題造景庭園。",
+            notes: "【必吃甜點】白色戀人聖代冰淇淋 (Parfait)、白戀貓咪限定濃郁純白霜淇淋", transit: { type: "bus", duration: "00時30分" } 
+          },
+          { 
+            id: "6-4", time: "17:30", stay: "02:00", name: "札幌啤酒園 (SAPPORO BEER EN)", category: "food", 
+            hours: "11:30 - 21:00 (L.O. 20:40; 無休息日)", 
+            image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+            desc: "歷史紅磚建築內的道地燒肉饗宴！新鮮無腥味的的成吉思汗烤羊肉，搭配直送冰涼生啤酒，氣氛極佳！",
+            notes: "【必吃】成吉思汗烤羊肉 + SAPPORO 直送經典生啤酒吃到飽（建議提早官網預約）", transit: { type: "foot", duration: "00時15分" } 
+          },
+          { 
+            id: "6-5", time: "20:00", stay: "02:00", name: "狸小路商店街 & 札幌夜間芭菲 (シメパフェ)", category: "shopping", 
+            hours: "驚安殿堂 24 小時; 芭菲店 18:00 - 24:00", 
+            image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80",
+            desc: "藥妝店與唐吉訶德大採購！採買後可體驗札幌在地獨特的「宵夜夜間芭菲 (シメパフェ)」文化。",
+            notes: "【札幌獨特文化】喝完酒/吃完飯後吃芭菲！名店推薦：Parfaitteria PAL / 初期 (Initial) 聖代", transit: null 
+          }
+        ]
+      },
+      {
+        day: 7,
+        date: "2026/10/24 (週六)",
+        title: "近郊休閒 ‧ Outlet 購物與頂級和牛",
+        hotel: "Sapporo View Hotel Odori Park",
+        spots: [
+          { 
+            id: "7-1", time: "09:30", stay: "03:00", name: "莫埃來沼公園 (Moerenuma Park)", category: "sightseeing", 
+            hours: "07:00 - 22:00 (金字塔 09:00 - 17:00)", 
+            image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+            desc: "知名雕塑家野口勇設計的藝術公園，巨大的玻璃金字塔與幾何秋色丘陵交織出高級感。",
+            notes: "玻璃金字塔內設有輕食咖啡廳，可品嚐法式法式鹹派與美式黑咖啡", transit: { type: "bus", duration: "00時40分" } 
+          },
+          { 
+            id: "7-2", time: "13:00", stay: "04:30", name: "三井 Outlet Park 札幌北廣島 美食街", category: "shopping", 
+            hours: "專櫃 10:00 - 20:00; 美食街 11:00 - 21:00", 
+            image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+            desc: "搭直達巴士進行戶外品牌、精品與國際服飾大採購，美食街集結了北海道多家經典名店！",
+            notes: "【必吃推薦】1. 弟子屈拉麵 / 2. 十勝豚丼 (炭燒醬香厚切豬肉蓋飯) / 3. 金子半之助天丼", transit: { type: "bus", duration: "00時45分" } 
+          },
+          { 
+            id: "7-3", time: "18:30", stay: "02:00", name: "薄野日本和牛燒肉 (燒肉 燕 / 黑澤)", category: "food", 
+            hours: "17:00 - 23:00 (L.O. 22:30)", 
+            image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=800&q=80",
+            desc: "旅程最後一晚的豪華慶祝饗宴！嚴選北海道在地白老牛與 A5 頂級日本和牛，油花均勻，入口即化。",
+            notes: "【必點】特選和牛盛合拼盤、極上厚切牛舌、白老和牛姿切沙朗（建議提前訂位）", transit: null 
+          }
+        ]
+      },
+      {
+        day: 8,
+        date: "2026/10/25 (週日)",
+        title: "新千歲機場最後衝刺 ‧ 滿載而歸 ✈️ 華航 CI131",
+        hotel: "返家",
+        spots: [
+          { 
+            id: "8-1", time: "09:30", stay: "00:45", name: "Sapporo View Hotel Odori Park ➡️ 新千歲機場", category: "train", 
+            hours: "JR 列車每 12 分鐘一班", 
+            image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
+            desc: "辦理退房，前往札幌站搭乘 JR 快速 AirPort 列車直達新千歲機場。",
+            notes: "【JR 快速 AirPort 班次】建議班次：09:36 | 前後替代班次：09:24、09:48、10:00（每 12 分鐘一班）", transit: { type: "foot", duration: "00時10分" } 
+          },
+          { 
+            id: "8-2", time: "10:30", stay: "01:30", name: "新千歲機場 國內線美食 & 美瑛選果 & 拉麵道場", category: "food", 
+            hours: "國內線商店 06:30 - 20:30; 拉麵道場 09:00 - 21:00", 
+            image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+            desc: "國內線是全日本最好逛的美食天堂！搶購美瑛選果現烤玉米麵包，並品嚐全日本聞名的濃郁甜蝦湯底拉麵與鮮奶霜淇淋。",
+            notes: "【必吃美食清單】1. 一幻蝦拉麵 (甜蝦濃郁湯頭) / 2. 美瑛選果現烤玉米麵包 (びえいのコーンパン) / 3. Kinotoya 極上牛乳霜淇淋", transit: { type: "foot", duration: "00時15分" } 
+          },
+          { 
+            id: "8-3", time: "12:00", stay: "02:40", name: "新千歲機場 國際線 ✈️ 華航 CI131", category: "airport", 
+            hours: "國際線櫃檯 11:40 開放 (航班 14:40 起飛)", 
+            image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+            desc: "辦理華航 CI131 報到托運，搭乘 B777-300 班機返回台灣桃園國際機場 T2。",
+            notes: "【航班資訊】中華航空 CI131 (B777-300) | 14:40 新千歲起飛 ✈️ 18:15 抵達桃園 T2 | 請於 12:00 前抵達辦理報到與托運", 
+            transit: null 
+          }
+        ]
+      }
+    ];
+
+    function App() {
+      const [activeDay, setActiveDay] = React.useState(1);
+      const [schedule, setSchedule] = React.useState(() => {
+        const saved = localStorage.getItem('hokkaido_travel_schedule_2026_v9');
+        return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
+      });
+      const [filterCategory, setFilterCategory] = React.useState('all');
+
+      React.useEffect(() => {
+        localStorage.setItem('hokkaido_travel_schedule_2026_v9', JSON.stringify(schedule));
+      }, [schedule]);
+
+      const resetScheduleToDefault = () => {
+        setSchedule(INITIAL_SCHEDULE);
+        localStorage.setItem('hokkaido_travel_schedule_2026_v9', JSON.stringify(INITIAL_SCHEDULE));
+      };
+
+      const currentDayData = schedule.find(s => s.day === activeDay) || schedule[0];
+
+      const getCategoryBadge = (cat) => {
+        switch (cat) {
+          case 'hotel': return { bg: 'bg-indigo-100 text-indigo-800 border-indigo-200', Icon: HotelIcon, label: '住宿' };
+          case 'food': return { bg: 'bg-amber-100 text-amber-800 border-amber-200', Icon: FoodIcon, label: '美食' };
+          case 'sightseeing': return { bg: 'bg-emerald-100 text-emerald-800 border-emerald-200', Icon: CameraIcon, label: '景點' };
+          case 'shopping': return { bg: 'bg-rose-100 text-rose-800 border-rose-200', Icon: ShoppingIcon, label: '購物' };
+          case 'car': return { bg: 'bg-blue-100 text-blue-800 border-blue-200', Icon: CarIcon, label: '租車/自駕' };
+          case 'train': return { bg: 'bg-purple-100 text-purple-800 border-purple-200', Icon: TrainIcon, label: '鐵道/JR' };
+          case 'airport': return { bg: 'bg-cyan-100 text-cyan-800 border-cyan-200', Icon: PlaneIcon, label: '航班/機場' };
+          default: return { bg: 'bg-gray-100 text-gray-800 border-gray-200', Icon: CameraIcon, label: '地點' };
+        }
+      };
+
+      const getGoogleMapsUrl = (spotName) => {
+        return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spotName)}`;
+      };
+
+      const getDirectionUrl = (origin, destination, transitType) => {
+        let mode = 'driving';
+        if (transitType === 'foot') mode = 'walking';
+        if (transitType === 'bus' || transitType === 'train') mode = 'transit';
+        return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=${mode}`;
+      };
+
+      return (
+        <div className="min-h-screen bg-stone-100 text-stone-800 pb-20 font-sans">
+          {}
+          <header className="bg-emerald-900 text-stone-100 shadow-md">
+            <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <SparklesIcon className="w-4 h-4 text-amber-400" />
+                  <span className="text-xs font-semibold tracking-wider text-emerald-200">2026/10/18 ~ 10/25</span>
+                </div>
+                <h1 className="text-lg md:text-xl font-bold tracking-tight text-white mt-0.5">
+                  北海道 8 日自駕 + 鐵道美食手札
+                </h1>
+              </div>
+              <button 
+                onClick={resetScheduleToDefault}
+                className="text-xs bg-emerald-800 hover:bg-emerald-700 text-emerald-100 px-3 py-2 rounded-xl border border-emerald-700 font-medium"
+              >
+                重設資料
+              </button>
+            </div>
+          </header>
+
+          {}
+          <div className="bg-emerald-800/90 text-emerald-100 border-b border-emerald-700 text-xs py-2 px-4 shadow-inner">
+            <div className="max-w-3xl mx-auto flex items-center justify-between overflow-x-auto whitespace-nowrap gap-4">
+              <div className="flex items-center space-x-1">
+                <HotelIcon className="w-3.5 h-3.5 text-amber-300 flex-shrink-0" />
+                <span className="font-semibold">入住飯店：</span>
+              </div>
+              <div className="flex space-x-3 text-emerald-200 text-xs">
+                <span>10/18-21: <strong className="text-white">Vessel Inn 中島公園</strong></span>
+                <span>•</span>
+                <span>10/21-22: <strong className="text-white">乃之風渡假酒店</strong></span>
+                <span>•</span>
+                <span>10/22-25: <strong className="text-white">Sapporo View Hotel</strong></span>
+              </div>
+            </div>
+          </div>
+
+          {}
+          <div className="sticky top-0 z-30 bg-stone-100/95 backdrop-blur border-b border-stone-200 shadow-sm">
+            <div className="max-w-3xl mx-auto px-2 flex overflow-x-auto py-2.5 no-scrollbar gap-1.5">
+              {schedule.map((d) => (
+                <button
+                  key={d.day}
+                  onClick={() => setActiveDay(d.day)}
+                  className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 flex flex-col items-center min-w-[68px] ${
+                    d.day === activeDay
+                      ? 'bg-amber-600 text-white shadow-md scale-105 font-bold'
+                      : 'bg-white text-stone-600 hover:bg-stone-200 border border-stone-200'
+                  }`}
+                >
+                  <span className="text-[10px] opacity-80">Day {d.day}</span>
+                  <span>{d.date.split(' ')[0].substring(5)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {}
+          <main className="max-w-3xl mx-auto px-4 pt-4">
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-stone-200/80 mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <div className="flex items-center space-x-2 text-amber-700 text-xs font-bold">
+                  <ClockIcon className="w-3.5 h-3.5" />
+                  <span>Day {currentDayData.day} ‧ {currentDayData.date}</span>
+                </div>
+                <h2 className="text-lg font-bold text-stone-900 mt-0.5">{currentDayData.title}</h2>
+              </div>
+              <div className="flex items-center space-x-1.5 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs text-amber-900 self-start sm:self-auto">
+                <HotelIcon className="w-3.5 h-3.5 text-amber-600" />
+                <span>今晚住宿：<strong className="text-stone-900">{currentDayData.hotel}</strong></span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {currentDayData.spots.map((spot, idx, array) => {
+                const badge = getCategoryBadge(spot.category);
+                const BadgeIcon = badge.Icon;
+                const nextSpot = array[idx + 1];
+
+                return (
+                  <React.Fragment key={spot.id}>
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-200/80 hover:shadow-md transition">
+                      {spot.image && (
+                        <div className="relative h-44 w-full bg-stone-200 overflow-hidden">
+                          <img 
+                            src={spot.image} 
+                            alt={spot.name}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-amber-300 text-xs px-2.5 py-1 rounded-full font-semibold flex items-center shadow-md">
+                            <BadgeIcon className="w-3 h-3 mr-1" /> {badge.label}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="p-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 rounded-full bg-emerald-800 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm border-2 border-white mt-0.5">
+                              {idx + 1}
+                            </div>
+                            <div>
+                              <div className="flex items-center space-x-2 flex-wrap gap-y-1">
+                                <span className="text-xs font-bold text-amber-700 flex items-center">
+                                  <ClockIcon className="w-3 h-3 mr-1 inline" />
+                                  行程規劃：{spot.time}
+                                </span>
+                                {spot.stay && spot.stay !== "00:00" && (
+                                  <span className="text-[10px] text-stone-500 bg-stone-100 px-1.5 py-0.5 rounded-full font-medium">
+                                    停留 {spot.stay}
+                                  </span>
+                                )}
+                              </div>
+                              <h3 className="text-base font-bold text-stone-900 mt-1">{spot.name}</h3>
+                              {spot.hours && (
+                                <div className="mt-1 text-xs text-amber-900 font-medium">
+                                  <strong>營業/服務時間：</strong>{spot.hours}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          <a
+                            href={getGoogleMapsUrl(spot.name)}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center space-x-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-2 rounded-xl font-medium shadow-sm flex-shrink-0 transition"
+                          >
+                            <NavIcon className="w-3.5 h-3.5" />
+                            <span>導航</span>
+                          </a>
+                        </div>
+
+                        {spot.desc && (
+                          <div className="mt-3 p-3 bg-stone-50 rounded-xl border border-stone-200/80 text-xs text-stone-800 leading-relaxed">
+                            <p>{spot.desc}</p>
+                          </div>
+                        )}
+
+                        {spot.notes && (
+                          <div className="mt-2 text-xs bg-amber-50/80 text-amber-950 border border-amber-200/80 p-2.5 rounded-xl">
+                            <p className="leading-relaxed">
+                              <strong>備註與提醒：</strong>{spot.notes}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {spot.transit && nextSpot && (
+                      <div className="my-2 ml-10 flex items-center text-[11px] text-stone-500 space-x-2">
+                        <div className="w-2 h-2 rounded-full bg-stone-300"></div>
+                        <div className="flex-1 border-t border-dashed border-stone-300"></div>
+                        <div className="bg-stone-200/90 px-2.5 py-1 rounded-full flex items-center space-x-1 font-medium text-stone-700">
+                          <span>{spot.transit.duration}</span>
+                        </div>
+                        <a
+                          href={getDirectionUrl(spot.name, nextSpot.name, spot.transit.type)}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[10px] text-blue-600 hover:underline flex items-center font-medium"
+                        >
+                          路線導航 ➔
+                        </a>
+                        <div className="flex-1 border-t border-dashed border-stone-300"></div>
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </main>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
