@@ -1,0 +1,1 @@
+# hokkaido-travel-2026
