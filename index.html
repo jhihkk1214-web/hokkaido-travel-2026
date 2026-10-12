@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>北海道 8 日自駕 + 鐵道美食手札 🍁</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -15,6 +12,10 @@
 </head>
 <body class="bg-stone-100 text-stone-800 pb-20 font-sans">
   <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
     const IconWrapper = ({ children, className = "w-4 h-4" }) => (
@@ -34,7 +35,6 @@
     const NavIcon = (props) => <IconWrapper {...props}><polygon points="3 11 22 2 13 21 11 13 3 11"/></IconWrapper>;
     const ClockIcon = (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></IconWrapper>;
     const SparklesIcon = (props) => <IconWrapper {...props}><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></IconWrapper>;
-    const HelpIcon = (props) => <IconWrapper {...props}><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></IconWrapper>;
 
     const INITIAL_SCHEDULE = [
       {
@@ -44,30 +44,38 @@
         hotel: "VESSEL INN 札幌中島公園",
         spots: [
           { 
-            id: "1-1", time: "11:00", stay: "06:55", name: "桃園國際機場 T1 ✈️ 新千歲國際機場", category: "airport", 
+            id: "1-1", time: "11:00", stay: "02:00", name: "桃園國際機場 T1 ✈️ 新千歲國際機場", category: "airport", 
             hours: "酷航 TR892 (B787-9) 13:00 起飛 ✈️ 17:55 抵達", 
             image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
-            desc: "搭乘酷航 TR892 班機直飛北海道新千歲國際機場，預計 17:55 降落並辦理入境及提領行李。",
-            notes: "【航班資訊】酷航 TR892 (B787-9) | 13:00 桃園 T1 起飛 ➡️ 17:55 抵達新千歲國際機場 | 請於 11:00 前抵達櫃檯辦理報到與托運", 
-            transit: { type: "train", duration: "00時10分" } 
+            desc: "11:00 抵達桃園 T1 櫃檯辦理報到與托運。搭乘酷航 TR892 直飛，預計日本時間 17:55 降落新千歲國際機場。",
+            notes: "【航班資訊】酷航 TR892 (B787-9) | 13:00 桃園 T1 起飛 ➡️ 17:55 抵達新千歲國際機場", 
+            transit: { type: "plane", duration: "04時55分" } 
           },
           { 
-            id: "1-2", time: "18:30", stay: "00:50", name: "新千歲機場 ➡️ JR 快速 AirPort ➡️ 地下鐵南北線 (前往飯店)", category: "train", 
-            hours: "JR 列車每 12 分鐘一班 (JR 約 37 分 + 地下鐵約 6 分)", 
+            id: "1-2", time: "17:55", stay: "01:00", name: "新千歲機場 (入境通關與提領行李)", category: "airport", 
+            hours: "機場服務時間 05:00 - 23:00", 
             image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
-            desc: "入境後順指標至國內線 B1F 搭乘 JR 快速 AirPort 列車至「札幌站」，轉乘地下鐵南北線（往真駒內方向）至「中島公園站」(N09) 2 號出口，步行 1 分鐘即達飯店。",
-            notes: "【搭乘路線指引】1. 新千歲機場 B1F 搭乘 JR 快速 AirPort ➡️ 札幌站 (約 37 分) | 2. 轉乘地下鐵南北線 ➡️ 中島公園站 (約 6 分) | 3. 2 號出口出站步行 1 分鐘即達 VESSEL INN", 
+            desc: "辦理入境審查、提取行李（預估 1 小時）。完成後順指標至國內線 B1F 準備搭乘 JR 快速 AirPort 列車。",
+            notes: "【入境提醒】請提早填妥 Visit Japan Web 入境與海關申報 QR Code。", 
+            transit: { type: "train", duration: "00時45分" } 
+          },
+          { 
+            id: "1-3", time: "18:55", stay: "00:45", name: "新千歲機場 ➡️ JR 快速 AirPort ➡️ 地下鐵南北線", category: "train", 
+            hours: "JR 列車約每 12 分鐘一班", 
+            image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
+            desc: "搭乘 JR 快速 AirPort 至「札幌站」(約 37 分)，轉乘地下鐵南北線（往真駒內）至「中島公園站」(N09) 2 號出口，步行 1 分鐘到飯店。",
+            notes: "【搭乘路線】1. JR 快速 AirPort ➡️ 札幌站 | 2. 地下鐵南北線 ➡️ 中島公園站 (N09) | 3. 2 號出口出站", 
             transit: { type: "foot", duration: "00時05分" } 
           },
           { 
-            id: "1-3", time: "19:30", stay: "00:45", name: "VESSEL INN 札幌中島公園 (Check-in)", category: "hotel", 
-            hours: "櫃檯 24 小時服務 (Check-in 14:00 後)", 
+            id: "1-4", time: "19:40", stay: "00:20", name: "VESSEL INN 札幌中島公園 (Check-in 放置行李)", category: "hotel", 
+            hours: "櫃檯 24 小時服務", 
             image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
-            desc: "辦理 Check-in 入住大通/中島公園旁高評價質感飯店。",
-            notes: "【飯店特色】榮獲全日本飯店早餐評比前列！明早可享用澎湃的生魚片勝手丼吃到飽。", transit: { type: "foot", duration: "00時10分" } 
+            desc: "辦理 Check-in 入住手續，將重行李放至房間（預留 20 分鐘），隨後輕鬆步行前往薄野享用熱騰騰的湯咖哩。",
+            notes: "【飯店亮點】全日本評價極高海鮮勝手丼吃到飽早餐！明早即可大快朵頤。", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
-            id: "1-4", time: "20:30", stay: "01:30", name: "SHO-RIN 札幌薄野總店 / GARAKU (晚餐)", category: "food", 
+            id: "1-5", time: "20:00", stay: "01:30", name: "SHO-RIN 札幌薄野總店 / GARAKU (晚餐)", category: "food", 
             hours: "17:00 - 03:00 (L.O. 02:30)", 
             image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
             desc: "薄野地道老牌湯咖哩！香醇濃郁的十幾種辛香料湯底配上酥炸雞腿與在地季節野菜。",
@@ -82,59 +90,59 @@
         hotel: "VESSEL INN 札幌中島公園",
         spots: [
           { 
-            id: "2-1", time: "08:00", stay: "00:30", name: "Toyota Rent a Car 札幌站前店 (取車)", category: "car", 
+            id: "2-1", time: "08:30", stay: "00:20", name: "Toyota Rent a Car 札幌站前店 (取車)", category: "car", 
             hours: "08:00 - 20:00", 
             image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
-            desc: "辦理取車手續，開啟美瑛一日自駕之旅，經道央自動車道往美瑛開去。",
-            notes: "【自駕提醒】租借 ETC 卡與 HEP (Hokkaido Expressway Pass)，經高速公路單程約 2.5 小時。", transit: { type: "car", duration: "02時30分" } 
+            desc: "08:30 開始辦理取車手續（預估 20 分鐘完畢），開車經道央自動車道往美瑛開去。",
+            notes: "【自駕提醒】租借 ETC 卡與 HEP (Hokkaido Expressway Pass)，經高速公路單程約 2.5 小時。", transit: { type: "car", duration: "02時20分" } 
           },
           { 
-            id: "2-2", time: "11:00", stay: "00:40", name: "美瑛拼布之路 (Patchwork Road)", category: "sightseeing", 
-            hours: "戶外開放景點 (建議白天前往)", 
+            id: "2-2", time: "11:10", stay: "00:30", name: "美瑛拼布之路 (Patchwork Road)", category: "sightseeing", 
+            hours: "戶外開放景點", 
             image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
             desc: "開車穿梭於美瑛波浪狀丘陵，欣賞 Ken & Mary 之樹與 Seven Star 之樹深秋大地景色。",
-            notes: "【打卡景點】Ken & Mary 之樹、Seven Star 之樹、親親子之樹", transit: { type: "car", duration: "00時20分" } 
+            notes: "【打卡景點】Ken & Mary 之樹、Seven Star 之樹、親親子之樹", transit: { type: "car", duration: "00時10分" } 
           },
           { 
-            id: "2-3", time: "12:00", stay: "01:00", name: "美瑛放牧酪農場 (Biei Farm)", category: "food", 
-            hours: "10:00 - 16:00 (週二定休)", 
-            image: "https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=800&q=80",
-            desc: "在極度開闊的丘陵牧場看放牧牛群，享用全日本頂級的現擠牛奶霜淇淋與鮮乳。",
-            notes: "【必吃推薦】純鮮奶霜淇淋、低溫殺菌鮮乳、手工起司可麗餅", transit: { type: "car", duration: "00時15分" } 
-          },
-          { 
-            id: "2-4", time: "13:15", stay: "01:00", name: "Blanc Rouge (ブラン・ルージュ) 午餐", category: "food", 
+            id: "2-3", time: "11:50", stay: "01:00", name: "Blanc Rouge (ブラン・ルージュ) 森林木屋午餐", category: "food", 
             hours: "11:00 - 15:00 (週四定休)", 
             image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-            desc: "隱藏在美瑛森林裡的溫馨木屋餐廳，招牌紅酒燉牛肉濃郁軟嫩。",
-            notes: "【必點招牌】紅酒燉牛肉套餐 (Beef Stew)、特製手作木屋下午茶蛋糕", transit: { type: "car", duration: "00時20分" } 
+            desc: "隱藏在美瑛森林裡的溫馨木屋餐廳，招牌紅酒燉牛肉濃郁軟嫩，搭配手作蛋糕。",
+            notes: "【預約提醒】10 月平日開放 11:00 或 11:30 電話預約（限量 2 組）。【必點】紅酒燉牛肉套餐 (Beef Stew)", transit: { type: "car", duration: "00時25分" } 
           },
           { 
-            id: "2-5", time: "14:35", stay: "00:45", name: "白金青池 (Shiroi Koibito Pond)", category: "sightseeing", 
+            id: "2-4", time: "13:15", stay: "00:45", name: "白金青池 (Shiroi Koibito Pond)", category: "sightseeing", 
             hours: "24 小時開放 (建議 16:30 前參觀)", 
             image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
             desc: "欣賞深秋冷冽清澈的寶藍色池水與落葉松枯木倒影，呈現極具神秘感的絕美奇景。",
             notes: "【貼心提醒】園區附設大型收費停車場 (500日圓)", transit: { type: "car", duration: "00時20分" } 
           },
           { 
-            id: "2-6", time: "15:40", stay: "00:45", name: "四季彩之丘 (Shikisai no Oka)", category: "sightseeing", 
+            id: "2-5", time: "14:20", stay: "00:35", name: "美瑛放牧酪農場 (Biei Farm)", category: "food", 
+            hours: "10:00 - 16:00 (週二定休)", 
+            image: "https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=800&q=80",
+            desc: "在極度開闊的丘陵牧場看放牧牛群，享用全日本頂級的現擠牛奶霜淇淋與鮮乳 (預留 35 分鐘)。",
+            notes: "【必吃推薦】純鮮奶霜淇淋、低溫殺菌鮮乳、手工起司可麗餅", transit: { type: "car", duration: "00時10分" } 
+          },
+          { 
+            id: "2-6", time: "15:05", stay: "00:45", name: "四季彩之丘 (Shikisai no Oka)", category: "sightseeing", 
             hours: "08:40 - 17:00", 
             image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
             desc: "搭乘拖拉機遊園車巡禮秋季丘陵線條，並可進園與超萌羊駝（草泥馬）互動餵食。",
             notes: "【體驗推薦】拖拉機遊園車、草泥馬牧場餵食區、現炸男爵馬鈴薯餅", transit: { type: "car", duration: "00時15分" } 
           },
           { 
-            id: "2-7", time: "16:40", stay: "00:30", name: "道之驛美瑛「丘之藏」", category: "shopping", 
+            id: "2-7", time: "16:05", stay: "00:30", name: "道之驛美瑛「丘之藏」", category: "shopping", 
             hours: "09:00 - 17:00", 
             image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
             desc: "舊軟石倉庫改建的在地道之驛，採買美瑛限定農特產與質感手作伴手禮。",
             notes: "【必買伴手禮】美瑛限定玉米餅乾、手工木雕製品、美瑛牛乳餅", transit: { type: "car", duration: "02時30分" } 
           },
           { 
-            id: "2-8", time: "19:40", stay: "00:20", name: "Toyota Rent a Car 札幌站前店 (還車)", category: "car", 
+            id: "2-8", time: "19:05", stay: "00:20", name: "Toyota Rent a Car 札幌站前店 (還車)", category: "car", 
             hours: "08:00 - 20:00", 
             image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
-            desc: "於還車店附近加油站加滿油後辦理歸還，步行返回大通/薄野區。",
+            desc: "於還車店附近加油站加滿油後辦理歸還，步行返回大通/薄野區享用晚餐。",
             notes: "【歸還提醒】請務必於 20:00 前加滿油返還車輛。", transit: null 
           }
         ]
@@ -142,57 +150,64 @@
       {
         day: 3,
         date: "2026/10/20 (週二)",
-        title: "小樽浪漫港都 ‧ 音樂盒堂、運河與天狗山夜景",
+        title: "小樽浪漫漫步 ‧ 堺町通伴手禮 ‧ Naruto 炸半雞與札幌晚餐",
         hotel: "VESSEL INN 札幌中島公園",
         spots: [
           { 
-            id: "3-1", time: "09:10", stay: "00:45", name: "札幌站 ➡️ 搭乘 JR 快速 AirPort ➡️ 南小樽站", category: "train", 
+            id: "3-1", time: "09:10", stay: "00:50", name: "札幌站 ➡️ 搭乘 JR 快速 AirPort ➡️ 南小樽站", category: "train", 
             hours: "JR 快速 AirPort 每 12 分鐘一班", 
             image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
-            desc: "從札幌站搭乘 JR 快速列車直達「南小樽站」，從此站下車沿著下坡路往小樽運河方向散步最輕鬆。",
-            notes: "【JR 快速 AirPort 班次】建議班次：09:18 | 替代班次：09:06、09:30、09:42（每 12 分鐘一班）", transit: { type: "foot", duration: "00時10分" } 
+            desc: "從札幌站搭乘 JR 快速列車直達「南小樽站」，下車後順著緩下坡一路逛往運河方向，最輕鬆省力！",
+            notes: "【JR 快速 AirPort 班次】建議班次：09:18 | 前後車次：09:06、09:30、09:42", transit: { type: "foot", duration: "00時05分" } 
           },
           { 
-            id: "3-2", time: "10:15", stay: "02:15", name: "小樽音樂盒堂 & 童話十字路口 (堺町通)", category: "sightseeing", 
-            hours: "09:00 - 18:00", 
+            id: "3-2", time: "10:05", stay: "02:40", name: "童話十字路口 & 堺町通伴手禮巡禮", category: "shopping", 
+            hours: "多數店家 09:00 - 18:00", 
             image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80",
-            desc: "欣賞音樂盒堂門口蒸汽鐘報時，漫步堺町通品嚐北菓樓大泡芙、六花亭與 LeTAO 雙層乳酪蛋糕。",
-            notes: "【甜點名店必吃】1. 北菓樓「夢不思議大泡芙」 / 2. LeTAO 總店現做「雙層乳酪蛋糕」 / 3. 六花亭葡萄夾心餅", transit: { type: "foot", duration: "00時15分" } 
+            desc: "觀賞音樂盒堂蒸汽鐘報時，沿堺町通採買 LeTAO 紅茶巧克力、起司夾心餅乾、六花亭葡萄餅與香噴噴現烤魷魚絲！",
+            notes: "【必買伴手禮清單】1. LeTAO「Royal Montagne 大吉嶺紅茶巧克力」 / 2. LeTAO「小樽色內通起司夾心餅乾」 / 3. 六花亭「葡萄夾心餅乾」 / 4. 堺町通特產現烤魷魚絲", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
-            id: "3-3", time: "12:30", stay: "01:30", name: "小樽壽司通 (政壽司 / 旭壽司)", category: "food", 
-            hours: "11:00 - 15:00 / 17:00 - 21:00 (週三定休)", 
-            image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=800&q=80",
-            desc: "享用正宗小樽名店海鮮丼與極上手握壽司，牡丹蝦、干貝與海膽鮮度爆表。",
-            notes: "【必點美味】特選政壽司盛合、極上海鮮丼、現握海膽與炙燒鮭魚脂壽司", transit: { type: "foot", duration: "00時15分" } 
+            id: "3-3", time: "12:55", stay: "01:20", name: "若鶏時代 なると 本店 (午餐：小樽名物炸半雞)", category: "food", 
+            hours: "11:00 - 21:00 (L.O. 20:30)", 
+            image: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80",
+            desc: "小樽極度有名的在地靈魂美食！不吃海鮮的超讚選擇！外皮酥脆多汁的「炸半雞 (若鶏半身揚げ)」，香氣爆棚！",
+            notes: "【必點名物】若鶏半身揚げ (炸半雞定食)、Zangi (日式炸雞塊)。【備選】小樽特色勾餡炒麵 (Ankake Yakisoba)", transit: { type: "foot", duration: "00時15分" } 
           },
           { 
-            id: "3-4", time: "14:00", stay: "02:00", name: "小樽運河 & 出拔小路", category: "sightseeing", 
+            id: "3-4", time: "14:30", stay: "01:30", name: "小樽運河 & 出拔小路", category: "sightseeing", 
             hours: "戶外全天開放", 
             image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80",
-            desc: "沿著經典的小樽運河石造倉庫群散步拍照，旁邊的出拔小路可品嚐哈密瓜霜淇淋與章魚燒。",
-            notes: "【必拍角點】小樽運河淺草橋鏡面倒影、出拔小路展望塔", transit: { type: "bus", duration: "00時20分" } 
+            desc: "沿著經典的小樽運河石造倉庫群散步拍照，出拔小路可品嚐夕張哈密瓜霜淇淋。",
+            notes: "【拍照角點】淺草橋鏡面前拍照、出拔小路展望塔", transit: { type: "foot", duration: "00時15分" } 
           },
           { 
-            id: "3-5", time: "16:15", stay: "01:45", name: "小樽天狗山纜車 (北海道三大夜景)", category: "sightseeing", 
-            hours: "09:00 - 21:00 (纜車每 12 分鐘一班)", 
-            image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
-            desc: "從小樽站搭乘中央巴士前往天狗山，搭纜車直達山頂俯瞰小樽港夕陽與璀璨夜景。",
-            notes: "【公車班次】小樽站前 9 號月台搭乘中央巴士 9 號線 (車程 20 分鐘，約每 20 分鐘一班)", transit: { type: "train", duration: "00時45分" } 
+            id: "3-5", time: "16:15", stay: "00:45", name: "舊手宮線鐵道遺跡 & 小樽站", category: "sightseeing", 
+            hours: "戶外全天開放", 
+            image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
+            desc: "漫步北海道第一條鐵路「舊手宮線」遺跡，隨後步行至小樽站準備搭車返回札幌。",
+            notes: "舊鐵道木棧道非常適合懷舊風格拍照", transit: { type: "train", duration: "00時45分" } 
           },
           { 
-            id: "3-6", time: "18:30", stay: "01:30", name: "小樽站 ➡️ 返回札幌站 / 根室花丸迴轉壽司 (晚餐)", category: "food", 
-            hours: "11:00 - 22:00", 
-            image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80",
-            desc: "搭乘 JR 快速 AirPort 返回札幌，至 JR Tower 享用超人氣根室花丸迴轉壽司。",
-            notes: "【美食推薦】根室花丸迴轉壽司（建議一回札幌站立刻先抽號碼牌）", transit: null 
+            id: "3-6", time: "17:15", stay: "00:45", name: "小樽站 ➡️ 搭乘 JR 快速 AirPort ➡️ 返回札幌站", category: "train", 
+            hours: "JR 快速 AirPort 每 12 分鐘一班", 
+            image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
+            desc: "從小樽站搭乘 JR 快速 AirPort 列車返回札幌站 (車程約 35~40 分鐘)。",
+            notes: "【替代車次】17:00、17:12、17:24、17:36", transit: { type: "foot", duration: "00時10分" } 
+          },
+          { 
+            id: "3-7", time: "18:15", stay: "02:00", name: "札幌站 / 薄野美食饗宴 (晚餐)", category: "food", 
+            hours: "依店家而異 (約 11:00 - 23:00)", 
+            image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+            desc: "回到札幌享用精采晚餐！推薦超人氣湯咖哩、成吉思汗烤羊肉或札幌味噌拉麵。",
+            notes: "【札幌晚餐推薦】1. 湯咖哩 GARAKU / Suage+ / 2. 成吉思汗烤羊肉 達摩 (Daruma) / 3. 根室花丸迴轉壽司", transit: null 
           }
         ]
       },
       {
         day: 4,
         date: "2026/10/21 (週三)",
-        title: "豐平峽水壩 ‧ 中山峠名物與乃之風湖景溫泉",
+        title: "豐平峽水壩 ‧ 中山峠炸馬鈴薯球 ‧ 乃之風湖景溫泉",
         hotel: "湖景TOYA乃之風渡假酒店",
         spots: [
           { 
@@ -349,7 +364,7 @@
             id: "7-2", time: "13:00", stay: "04:30", name: "三井 Outlet Park 札幌北廣島 美食街", category: "shopping", 
             hours: "專櫃 10:00 - 20:00; 美食街 11:00 - 21:00", 
             image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
-            desc: "搭直達巴士進行戶外品牌、精品與國際服飾大採購，美食街集結了北海道多家經典名店！",
+            desc: "搭直達巴士進行戶線品牌、精品與國際服飾大採購，美食街集結了北海道多家經典名店！",
             notes: "【必吃推薦】1. 弟子屈拉麵 / 2. 十勝豚丼 (炭燒醬香厚切豬肉蓋飯) / 3. 金子半之助天丼", transit: { type: "bus", duration: "00時45分" } 
           },
           { 
@@ -372,7 +387,7 @@
             hours: "JR 列車每 12 分鐘一班", 
             image: "https://images.unsplash.com/photo-1532105956626-9569c03602f6?auto=format&fit=crop&w=800&q=80",
             desc: "辦理退房，前往札幌站搭乘 JR 快速 AirPort 列車直達新千歲機場。",
-            notes: "【JR 快速 AirPort 班次】建議班次：09:36 | 前後替代班次：09:24、09:48、10:00（每 12 分鐘一班）", transit: { type: "foot", duration: "00時10分" } 
+            notes: "【JR 快速 AirPort 班次】建議班次：09:36 | 前後替代班次：09:24、09:48、10:00", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
             id: "8-2", time: "10:30", stay: "01:30", name: "新千歲機場 國內線美食 & 美瑛選果 & 拉麵道場", category: "food", 
@@ -386,7 +401,7 @@
             hours: "國際線櫃檯 11:40 開放 (航班 14:40 起飛)", 
             image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
             desc: "辦理華航 CI131 報到托運，搭乘 B777-300 班機返回台灣桃園國際機場 T2。",
-            notes: "【航班資訊】中華航空 CI131 (B777-300) | 14:40 新千歲起飛 ✈️ 18:15 抵達桃園 T2 | 請於 12:00 前抵達辦理報到與托運", 
+            notes: "【航班資訊】中華航空 CI131 (B777-300) | 14:40 新千歲起飛 ✈️ 18:15 抵達桃園 T2", 
             transit: null 
           }
         ]
@@ -396,18 +411,17 @@
     function App() {
       const [activeDay, setActiveDay] = React.useState(1);
       const [schedule, setSchedule] = React.useState(() => {
-        const saved = localStorage.getItem('hokkaido_travel_schedule_2026_v9');
+        const saved = localStorage.getItem('hokkaido_travel_schedule_2026_v12');
         return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
       });
-      const [filterCategory, setFilterCategory] = React.useState('all');
 
       React.useEffect(() => {
-        localStorage.setItem('hokkaido_travel_schedule_2026_v9', JSON.stringify(schedule));
+        localStorage.setItem('hokkaido_travel_schedule_2026_v12', JSON.stringify(schedule));
       }, [schedule]);
 
       const resetScheduleToDefault = () => {
         setSchedule(INITIAL_SCHEDULE);
-        localStorage.setItem('hokkaido_travel_schedule_2026_v9', JSON.stringify(INITIAL_SCHEDULE));
+        localStorage.setItem('hokkaido_travel_schedule_2026_v12', JSON.stringify(INITIAL_SCHEDULE));
       };
 
       const currentDayData = schedule.find(s => s.day === activeDay) || schedule[0];
@@ -438,7 +452,6 @@
 
       return (
         <div className="min-h-screen bg-stone-100 text-stone-800 pb-20 font-sans">
-          {}
           <header className="bg-emerald-900 text-stone-100 shadow-md">
             <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
               <div>
@@ -452,14 +465,13 @@
               </div>
               <button 
                 onClick={resetScheduleToDefault}
-                className="text-xs bg-emerald-800 hover:bg-emerald-700 text-emerald-100 px-3 py-2 rounded-xl border border-emerald-700 font-medium"
+                className="text-xs bg-emerald-800 hover:bg-emerald-700 text-emerald-100 px-3 py-2 rounded-xl border border-emerald-700 font-medium transition"
               >
-                重設資料
+                重設最新資料
               </button>
             </div>
           </header>
 
-          {}
           <div className="bg-emerald-800/90 text-emerald-100 border-b border-emerald-700 text-xs py-2 px-4 shadow-inner">
             <div className="max-w-3xl mx-auto flex items-center justify-between overflow-x-auto whitespace-nowrap gap-4">
               <div className="flex items-center space-x-1">
@@ -476,7 +488,6 @@
             </div>
           </div>
 
-          {}
           <div className="sticky top-0 z-30 bg-stone-100/95 backdrop-blur border-b border-stone-200 shadow-sm">
             <div className="max-w-3xl mx-auto px-2 flex overflow-x-auto py-2.5 no-scrollbar gap-1.5">
               {schedule.map((d) => (
@@ -496,7 +507,6 @@
             </div>
           </div>
 
-          {}
           <main className="max-w-3xl mx-auto px-4 pt-4">
             <div className="bg-white rounded-2xl p-4 shadow-sm border border-stone-200/80 mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
