@@ -36,6 +36,7 @@
     const SparklesIcon = (props) => <IconWrapper {...props}><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></IconWrapper>;
     const ExternalLinkIcon = (props) => <IconWrapper {...props}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></IconWrapper>;
     const EditIcon = (props) => <IconWrapper {...props}><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></IconWrapper>;
+    const RefreshIcon = (props) => <IconWrapper {...props}><path d="M21.5 2v6h-6"/><path d="M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></IconWrapper>;
 
     const INITIAL_SCHEDULE = [
       {
@@ -49,36 +50,36 @@
           tempHigh: "17°C",
           tempLow: "13°C",
           rainProb: "30%",
-          note: "日本氣象廳 (JMA)：秋季短暫陣雨，晚間抵達市區體感偏涼，建議備薄外套。",
+          note: "十月下旬北海道體感偏涼，降雨機率低，晚間抵達市區建議著保暖外套。",
           tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1100/"
         },
         spots: [
           { 
             id: "1-1", time: "11:00", stay: "02:00", name: "桃園國際機場 T1 ✈️ 新千歲國際機場", category: "airport", 
             hours: "酷航 TR892 (B787-9) 13:00 起飛 ✈️ 17:55 抵達", 
-            desc: "11:00 抵達桃園 T1 櫃檯辦理報到與托運。搭乘酷航 TR892 直飛，預計日本時間 17:55 降落新千歲國際機場。",
-            notes: "【航班資訊】酷航 TR892 (B787-9) | 13:00 桃園 T1 起飛 ➡️ 17:55 抵達新千歲國際機場", 
+            desc: "11:00 抵達桃園 T1 辦理報到。搭乘酷航直飛，日本時間 17:55 降落新千歲國際機場。",
+            notes: "【航班資訊】酷航 TR892 | 13:00 桃園 T1 起飛 ➡️ 17:55 抵達新千歲", 
             transit: { type: "plane", duration: "04時55分" } 
           },
           { 
             id: "1-2", time: "17:55", stay: "01:00", name: "新千歲機場 (入境通關與提領行李)", category: "airport", 
             hours: "機場服務時間 05:00 - 23:00", 
-            desc: "辦理入境審查、提取行李（預估 1 小時）。完成後順指標至國內線 B1F 準備搭乘 JR 快速 AirPort 列車。",
-            notes: "【入境提醒】請提早填妥 Visit Japan Web 入境與海關申報 QR Code。", 
+            desc: "辦理入境審查、提取行李。完成後順指標至國內線 B1F 準備搭乘 JR 快速 AirPort 列車。",
+            notes: "【入境提醒】請提早填妥 Visit Japan Web QR Code。", 
             transit: { type: "train", duration: "00時45分" } 
           },
           { 
             id: "1-3", time: "18:55", stay: "00:45", name: "新千歲機場 ➡️ JR 快速 AirPort ➡️ 地下鐵南北線", category: "train", 
             hours: "JR 列車約每 12 分鐘一班", 
-            desc: "搭乘 JR 快速 AirPort 至「札幌站」(約 37 分)，轉乘地下鐵南北線（往真駒內）至「中島公園站」(N09) 2 號出口，步行 1 分鐘到飯店。",
-            notes: "【搭乘路線】1. JR 快速 AirPort ➡️ 札幌站 | 2. 地下鐵南北線 ➡️ 中島公園站 (N09) | 3. 2 號出口出站", 
+            desc: "搭乘 JR 快速 AirPort 至「札幌站」(約 37 分)，轉乘地下鐵南北線至「中島公園站」(N09) 2 號出口，步行 1 分鐘到飯店。",
+            notes: "【搭乘路線】1. JR 快速 AirPort ➡️ 札幌站 | 2. 地下鐵南北線 ➡️ 中島公園站 (N09)", 
             transit: { type: "foot", duration: "00時05分" } 
           },
           { 
             id: "1-4", time: "19:40", stay: "00:20", name: "VESSEL INN 札幌中島公園 (Check-in 放置行李)", category: "hotel", 
             hours: "櫃檯 24 小時服務", 
-            desc: "辦理 Check-in 入住手續，將重行李放至房間（預留 20 分鐘），隨後輕鬆步行前往薄野享用熱騰騰的湯咖哩。",
-            notes: "【飯店亮點】全日本評價極高海鮮勝手丼吃到飽早餐！明早即可大快朵頤。", transit: { type: "foot", duration: "00時10分" } 
+            desc: "辦理 Check-in 入住手續，將重行李放至房間，隨後輕鬆步行前往薄野享用熱騰騰的湯咖哩。",
+            notes: "【飯店亮點】全日本評價極高海鮮勝手丼吃到飽早餐！", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
             id: "1-5", time: "20:00", stay: "01:30", name: "SHO-RIN 札幌薄野總店 / GARAKU (晚餐)", category: "food", 
@@ -91,65 +92,53 @@
       {
         day: 2,
         date: "2026/10/19 (週一)",
-        title: "美瑛美景與甜點一日遊 ‧ 全程自駕",
+        title: "神宮與北大銀杏 ‧ 諏訪神社賞花手水 ‧ 狸小路大採購 🛍️",
         hotel: "VESSEL INN 札幌中島公園",
         weather: {
-          area: "biei",
+          area: "sapporo",
           condition: "晴時多雲 ☀️⛅",
-          tempHigh: "18°C",
-          tempLow: "9°C",
-          rainProb: "20%",
-          note: "tenki.jp：丘陵區清晨低溫接近 3~5°C，日夜溫差極大，請攜帶防風禦寒外套。",
-          tenkiUrl: "https://tenki.jp/forecast/1/1/1200/1558/"
+          tempHigh: "16°C",
+          tempLow: "6°C",
+          rainProb: "25%",
+          note: "秋高氣爽，陽光舒適，非常適合拍攝北大銀杏並木與神社巡禮。",
+          tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1100/"
         },
         spots: [
           { 
-            id: "2-1", time: "08:30", stay: "00:20", name: "Toyota Rent a Car 札幌站前店 (取車)", category: "car", 
-            hours: "08:00 - 20:00", 
-            desc: "08:30 開始辦理取車手續（預估 20 分鐘完畢），開車經道央自動車道往美瑛開去。",
-            notes: "【自駕提醒】租借 ETC 卡與 HEP (Hokkaido Expressway Pass)，經高速公路單程約 2.5 小時。", transit: { type: "car", duration: "02時20分" } 
+            id: "2-1", time: "09:30", stay: "01:30", name: "北海道神宮 & 六花亭神宮茶屋", category: "sightseeing", 
+            hours: "神宮 06:00 - 16:00; 六花亭茶屋 09:00 - 16:00", 
+            desc: "參拜幽靜的北海道第一大神宮，並至神宮內隱藏版「六花亭神宮茶屋」享用現場現烤的熱騰騰紅豆年糕「判官樣」。",
+            notes: "【必吃特色美食】六花亭神宮茶屋限定「判官樣 (判官さま)」現烤蕎麥紅豆餅！", transit: { type: "train", duration: "00時25分" } 
           },
           { 
-            id: "2-2", time: "11:10", stay: "00:30", name: "美瑛拼布之路 (Patchwork Road)", category: "sightseeing", 
-            hours: "戶外開放景點", 
-            desc: "開車穿梭於美瑛波浪狀丘陵，欣賞 Ken & Mary 之樹與 Seven Star 之樹深秋大地景色。",
-            notes: "【打卡景點】Ken & Mary 之樹、Seven Star 之樹、親親子之樹", transit: { type: "car", duration: "00時10分" } 
+            id: "2-2", time: "11:30", stay: "02:00", name: "北海道大學 (金黃銀杏並木 & 校園漫步 & 午餐)", category: "sightseeing", 
+            hours: "校園全天開放 (10月下旬為銀杏大道最美季節)", 
+            desc: "10 月下旬絕不能錯過的金黃「銀杏並木」！漫步古老歐風校園，午餐可享用校內食堂或周邊超人氣湯咖哩。",
+            notes: "【周邊美食】Picante 湯咖哩 / 北海道大學中央食堂 / Curry Di.SAVOY", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
-            id: "2-3", time: "11:50", stay: "01:00", name: "Blanc Rouge (ブラン・ルージュ) 森林木屋午餐", category: "food", 
-            hours: "11:00 - 15:00 (週四定休)", 
-            desc: "隱藏在美瑛森林裡的溫馨木屋餐廳，招牌紅酒燉牛肉濃郁軟嫩，搭配手作蛋糕。",
-            notes: "【預約提醒】10 月平日開放 11:00 或 11:30 電話預約（限量 2 組）。【必點】紅酒燉牛肉套餐 (Beef Stew)", transit: { type: "car", duration: "00時25分" } 
+            id: "2-3", time: "13:40", stay: "01:00", name: "札幌諏訪神社 (賞美麗花手水 & 收集透明/蕾絲御守)", category: "sightseeing", 
+            hours: "社務所 09:00 - 17:00", 
+            desc: "札幌超人氣爆紅神社，賞夢幻花手水池、領當月限定水彩御朱印與水晶透明/蕾絲御守。",
+            notes: "【特色收集】超美繽紛花手水、限定透明水晶御守、蕾絲刺繡御守", transit: { type: "foot", duration: "00時15分" } 
           },
           { 
-            id: "2-4", time: "13:15", stay: "00:45", name: "白金青池 (Shiroi Koibito Pond)", category: "sightseeing", 
-            hours: "24 小時開放 (建議 16:30 前參觀)", 
-            desc: "欣賞深秋冷冽清澈的寶藍色池水與落葉松枯木倒影，呈現極具神秘感的絕美奇景。",
-            notes: "【貼心提醒】園區附設大型收費停車場 (500日圓)", transit: { type: "car", duration: "00時20分" } 
+            id: "2-4", time: "15:00", stay: "01:30", name: "北海道廳舊本廳舍 (赤れんが庁舎) & 札幌時計台", category: "sightseeing", 
+            hours: "08:45 - 17:10", 
+            desc: "漫步參觀美麗巴洛克風格紅磚建築「赤れんが庁舎」與庭園秋景，隨後前往札幌地標「時計台」拍照留念。",
+            notes: "【拍照景點】紅磚廳舍銀杏庭園、時計台經典打卡點", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
-            id: "2-5", time: "14:20", stay: "00:35", name: "美瑛放牧酪農場 (Biei Farm)", category: "food", 
-            hours: "10:00 - 16:00 (週二定休)", 
-            desc: "在極度開闊的丘陵牧場看放牧牛群，享用全日本頂級的現擠牛奶霜淇淋與鮮乳 (預留 35 分鐘)。",
-            notes: "【必吃推薦】純鮮奶霜淇淋、低溫殺菌鮮乳、手工起司可麗餅", transit: { type: "car", duration: "00時10分" } 
+            id: "2-5", time: "16:45", stay: "02:15", name: "狸小路商店街 & 站前百貨 (藥妝 & 伴手禮大採購)", category: "shopping", 
+            hours: "驚安殿堂 24 小時; 多數店家營業至 20:00~21:00", 
+            desc: "走訪狸小路 1~7 丁目與站前商圈，採買免稅藥妝、日系服飾、零食餅乾與土產伴手禮。",
+            notes: "【購物指南】驚安殿堂唐吉訶德、松本清、Sundrug 藥妝免稅採買", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
-            id: "2-6", time: "15:05", stay: "00:45", name: "四季彩之丘 (Shikisai no Oka)", category: "sightseeing", 
-            hours: "08:40 - 17:00", 
-            desc: "搭乘拖拉機遊園車巡禮秋季丘陵線條，並可進園與超萌羊駝（草泥馬）互動餵食。",
-            notes: "【體驗推薦】拖拉機遊園車、草泥馬牧場餵食區、現炸男爵馬鈴薯餅", transit: { type: "car", duration: "00時15分" } 
-          },
-          { 
-            id: "2-7", time: "16:05", stay: "00:30", name: "道之驛美瑛「丘之藏」", category: "shopping", 
-            hours: "09:00 - 17:00", 
-            desc: "舊軟石倉庫改建的在地道之驛，採買美瑛限定農特產與質感手作伴手禮。",
-            notes: "【必買伴手禮】美瑛限定玉米餅乾、手工木雕製品、美瑛牛乳餅", transit: { type: "car", duration: "02時30分" } 
-          },
-          { 
-            id: "2-8", time: "19:05", stay: "00:20", name: "Toyota Rent a Car 札幌站前店 (還車)", category: "car", 
-            hours: "08:00 - 20:00", 
-            desc: "於還車店附近加油站加滿油後辦理歸還，步行返回大通/薄野區享用晚餐。",
-            notes: "【歸還提醒】請務必於 20:00 前加滿油返還車輛。", transit: null 
+            id: "2-6", time: "19:00", stay: "02:00", name: "札幌市區晚餐三強備選 & 宵夜夜間芭菲 (シメパフェ)", category: "food", 
+            hours: "約 11:00 - 22:00 / 芭菲店 18:00 - 24:00", 
+            desc: "提供三家極具特色的札幌在地名店選項，飯後還可體驗札幌獨特的宵夜夜間芭菲文化：",
+            notes: "【晚餐三選項】1. できたて屋 時計台店 (現烤一夜干) / 2. とんかつ玉藤 (豬排) / 3. 十勝燒肉丼 (豚丼いっぴん)", transit: null 
           }
         ]
       },
@@ -164,33 +153,33 @@
           tempHigh: "15°C",
           tempLow: "10°C",
           rainProb: "35%",
-          note: "tenki.jp：沿海小樽海風較強，有局部短暫微雨，請備妥輕便摺疊傘與防風外套。",
+          note: "沿海小樽海風較強，有局部短暫微雨，請備妥輕便摺疊傘與防風外套。",
           tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1203/"
         },
         spots: [
           { 
             id: "3-1", time: "09:10", stay: "00:50", name: "札幌站 ➡️ 搭乘 JR 快速 AirPort ➡️ 南小樽站", category: "train", 
-            hours: "JR 快速 AirPort 每 12 分鐘一班", 
+            hours: "JR 列車約每 12 分鐘一班", 
             desc: "從札幌站搭乘 JR 快速列車直達「南小樽站」，下車後順著緩下坡一路逛往運河方向，最輕鬆省力！",
-            notes: "【JR 快速 AirPort 班次】建議班次：09:18 | 前後車次：09:06、09:30、09:42", transit: { type: "foot", duration: "00時05分" } 
+            notes: "【JR 快速 AirPort】建議班次：09:18 | 替代車次：09:06、09:30", transit: { type: "foot", duration: "00時05分" } 
           },
           { 
             id: "3-2", time: "10:05", stay: "02:40", name: "童話十字路口 & 堺町通伴手禮巡禮", category: "shopping", 
             hours: "多數店家 09:00 - 18:00", 
-            desc: "觀賞音樂盒堂蒸汽鐘報時，沿堺町通採買 LeTAO 紅茶巧克力、起司夾心餅乾、六花亭葡萄餅與香噴噴現烤魷魚絲！",
-            notes: "【必買伴手禮清單】1. LeTAO「Royal Montagne 大吉嶺紅茶巧克力」 / 2. LeTAO「小樽色內通起司夾心餅乾」 / 3. 六花亭「葡萄夾心餅乾」 / 4. 堺町通特產現烤魷魚絲", transit: { type: "foot", duration: "00時10分" } 
+            desc: "觀賞音樂盒堂蒸汽鐘報時，沿堺町通採買 LeTAO 紅茶巧克力、起司夾心餅乾與六花亭葡萄餅！",
+            notes: "【必買伴手禮】1. LeTAO 大吉嶺紅茶巧克力 / 2. 六花亭葡萄餅 / 3. 現烤魷魚絲", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
             id: "3-3", time: "12:55", stay: "01:20", name: "小樽商圈隨意探索與午餐 (彈性享用在地美食)", category: "food", 
             hours: "依各店家營業時間為準", 
-            desc: "不設限特定餐廳！可依當時心情在堺町通或小樽運河周邊自由探索，品嚐手握壽司、海鮮丼、勾餡炒麵或地道洋食小店。",
-            notes: "【小樽午餐美食備選】小樽壽司通 (政壽司/旭壽司)、出拔小路小吃、澤崎水產海鮮丼等", transit: { type: "foot", duration: "00時15分" } 
+            desc: "不設限特定餐廳！可依當時心情在堺町通或小樽運河周邊自由探索，品嚐手握壽司、海鮮丼或小吃。",
+            notes: "【小樽午餐備選】小樽壽司通 (政壽司/旭壽司)、出拔小路小吃、澤崎水產海鮮丼等", transit: { type: "foot", duration: "00時15分" } 
           },
           { 
             id: "3-4", time: "14:30", stay: "01:30", name: "小樽運河 & 出拔小路", category: "sightseeing", 
             hours: "戶外全天開放", 
             desc: "沿著經典的小樽運河石造倉庫群散步拍照，出拔小路可品嚐夕張哈密瓜霜淇淋。",
-            notes: "【拍照角點】淺草橋鏡面前拍照、出拔小路展望塔", transit: { type: "foot", duration: "00時15分" } 
+            notes: "【拍照景點】淺草橋鏡面前拍照、出拔小路展望塔", transit: { type: "foot", duration: "00時15分" } 
           },
           { 
             id: "3-5", time: "16:15", stay: "00:45", name: "舊手宮線鐵道遺跡 & 小樽站", category: "sightseeing", 
@@ -202,13 +191,13 @@
             id: "3-6", time: "17:15", stay: "00:45", name: "小樽站 ➡️ 搭乘 JR 快速 AirPort ➡️ 返回札幌站", category: "train", 
             hours: "JR 快速 AirPort 每 12 分鐘一班", 
             desc: "從小樽站搭乘 JR 快速 AirPort 列車返回札幌站 (車程約 35~40 分鐘)。",
-            notes: "【替代車次】17:00、17:12、17:24、17:36", transit: { type: "foot", duration: "00時10分" } 
+            notes: "【替代車次】17:00、17:12、17:24", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
             id: "3-7", time: "18:30", stay: "02:00", name: "しゃぶしゃぶ 萵苣 Lettuce (晚餐：高質感個人湯頭涮涮鍋)", category: "food", 
             hours: "17:00 - 22:00 (可選札幌站前店或薄野店)", 
-            desc: "一人一鍋的高質感時尚涮涮鍋！主打豐富多樣的北海道在地特選蔬菜與極上肉品，搭配多款特製湯頭與沾醬，美味又輕盈負擔小。",
-            notes: "【預約提醒】建議提前線上預約！可選【札幌站前店】(日本生命札幌大樓 B1F) 或【薄野店】(冰雪之門大樓 1F)", transit: null 
+            desc: "一人一鍋的高質感時尚涮涮鍋！主打豐富多樣的北海道在地特選蔬菜與極上肉品，搭配多款特製湯頭與沾醬。",
+            notes: "【預約提醒】建議提前線上預約！可選【札幌站前店】(日本生命大樓 B1F) 或【薄野店】", transit: null 
           }
         ]
       },
@@ -223,7 +212,7 @@
           tempHigh: "15°C",
           tempLow: "7°C",
           rainProb: "30%",
-          note: "tenki.jp：中山峠山區高處氣溫較低（約 3~5°C），路面易受冷空氣影響，開車請注意安全。",
+          note: "中山峠山區高處氣溫較低，路面易受冷空氣影響，開車請注意安全。",
           tenkiUrl: "https://tenki.jp/forecast/1/2/1400/01395/"
         },
         spots: [
@@ -237,13 +226,13 @@
             id: "4-2", time: "09:30", stay: "02:00", name: "定山溪水壩 & 定山湖 豐平峽水壩", category: "sightseeing", 
             hours: "08:45 - 16:00 (電氣巴士營運時間)", 
             desc: "直奔定山溪山區的豐平峽水壩，搭乘無污染電氣巴士前往水壩頂端，欣賞定山湖與壯麗溪谷深秋景色。",
-            notes: "【必遊亮點】搭乘混合動力電氣巴士、水壩觀景台展望台俯瞰定山湖", transit: { type: "car", duration: "00時45分" } 
+            notes: "【必遊亮點】搭乘電氣巴士、水壩觀景台俯瞰定山湖", transit: { type: "car", duration: "00時45分" } 
           },
           { 
             id: "4-3", time: "12:30", stay: "01:00", name: "中山峠道之驛 (必吃：峠のあげ芋 炸馬鈴薯球)", category: "food", 
             hours: "08:30 - 17:30", 
             desc: "前往洞爺湖必經的中繼站！享用全北海道銷售第一名、外酥內軟甜甜的「峠のあげ芋」（炸馬鈴薯球）。",
-            notes: "【必吃名物】峠のあげ芋 (一串三個，外皮甜酥、羊蹄山馬鈴薯極度綿密！)", transit: { type: "car", duration: "01時00分" } 
+            notes: "【必吃名物】峠のあげ芋 (一串三個，外皮甜酥、馬鈴薯極度綿密！)", transit: { type: "car", duration: "01時00分" } 
           },
           { 
             id: "4-4", time: "14:30", stay: "01:00", name: "洞爺湖筒倉展望台 (Silo Observatory)", category: "sightseeing", 
@@ -270,7 +259,7 @@
           tempHigh: "15°C",
           tempLow: "8°C",
           rainProb: "30%",
-          note: "tenki.jp：多雲天氣為主，有珠山頂端風勢較強，請穿著防風外套。",
+          note: "多雲天氣為主，有珠山頂端風勢較強，請穿著防風外套。",
           tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1100/"
         },
         spots: [
@@ -278,36 +267,36 @@
             id: "5-1", time: "09:00", stay: "01:20", name: "乃之風退房 ➡️ 有珠山纜車 (Usuzan Ropeway)", category: "sightseeing", 
             hours: "08:00 - 17:00 (纜車每 15 分鐘一班)", 
             desc: "乃之風辦理退房後，開車 15 分鐘前往有珠山纜車。搭乘纜車登頂，近距離俯瞰活火山昭和新山與洞爺湖全景。",
-            notes: "【必看亮點】昭和新山火口原展望台、有珠山火口原散步道（可俯瞰洞爺湖全景）", transit: { type: "car", duration: "00時50分" } 
+            notes: "【必看亮點】昭和新山火口原展望台、有珠山火口原散步道", transit: { type: "car", duration: "00時50分" } 
           },
           { 
             id: "5-2", time: "10:45", stay: "01:10", name: "登別地獄谷 & 大湯沼", category: "sightseeing", 
             hours: "全天開放", 
             desc: "開車走道央自動車道前往登別，沿著木棧道欣賞煙霧繚繞的火山谷地地形與鐵泉池。",
-            notes: "【建議路線】地獄谷展望台 ➡️ 鐵泉池 ➡️ 大湯沼（順路往札幌方向出發）", transit: { type: "car", duration: "01時10分" } 
+            notes: "【建議路線】地獄谷展望台 ➡️ 鐵泉池 ➡️ 大湯沼", transit: { type: "car", duration: "01時10分" } 
           },
           { 
             id: "5-3", time: "13:00", stay: "01:30", name: "超人氣迴轉壽司 トリトン (TORITON) 清田店 (午餐)", category: "food", 
             hours: "11:00 - 22:00 (L.O. 21:30)", 
             desc: "進入札幌市區順路經過的清田分店！北海道排隊名店，食材厚切新鮮，干貝、牡丹蝦與鮭魚卵必點。",
-            notes: "【必點美食】炙燒鮭魚脂壽司、北海道產生干貝、鮭魚卵軍艦、牡丹蝦（到達後先至櫃檯抽號碼牌）", transit: { type: "car", duration: "00時30分" } 
+            notes: "【必點美食】炙燒鮭魚脂壽司、北海道產生干貝、鮭魚卵軍艦、牡丹蝦", transit: { type: "car", duration: "00時30分" } 
           },
           { 
             id: "5-4", time: "15:00", stay: "02:00", name: "AEON MALL Sapporo-Hassamu (イオンモール札幌発寒)", category: "shopping", 
             hours: "專門店街 10:00 - 21:00 / 超市 08:00 - 23:00", 
             desc: "札幌大型 AEON 購物中心，排定 2 小時好好逛街採買各式日系服飾、雜貨、生活用品與免稅零食！",
-            notes: "【購物亮點】服飾雜貨專門店、超市免稅採買、大型玩具與生活百貨，設有室內大型停車場", transit: { type: "car", duration: "00時30分" } 
+            notes: "【購物亮點】服飾雜貨專門店、超市免稅採買，設有室內大型停車場", transit: { type: "car", duration: "00時30分" } 
           },
           { 
             id: "5-5", time: "17:30", stay: "00:20", name: "開車至 Sapporo View Hotel Odori Park (先卸行李 & Check-in)", category: "hotel", 
             hours: "櫃檯 24 小時服務", 
-            desc: "先將車輛開至大通公園飯店門口，把 AEON 採買的大包小包與行李箱搬下車，辦理入住 Check-in！",
-            notes: "【貼心流程】先至飯店卸行李，還車時免去提著重物走回飯店的困擾，極度輕鬆！", transit: { type: "car", duration: "00時10分" } 
+            desc: "先將車輛開至大通公園飯店門口，把採買大包小包與行李箱搬下車，辦理入住 Check-in！",
+            notes: "【貼心流程】先至飯店卸行李，還車時免去提著重物走回飯店，極度輕鬆！", transit: { type: "car", duration: "00時10分" } 
           },
           { 
             id: "5-6", time: "17:55", stay: "00:35", name: "加滿油 ➡️ Toyota Rent a Car 札幌站前店 (還車)", category: "car", 
             hours: "08:00 - 20:00", 
-            desc: "於還車店附近加油站將車輛加滿油，返還 Toyota 租車並辦理結算手續（時間極度充裕不趕路）。",
+            desc: "於還車店附近加油站將車輛加滿油，返還 Toyota 租車並辦理結算手續。",
             notes: "【還車提醒】務必於 19:30 前完成加滿油與歸還手續！", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
@@ -321,53 +310,65 @@
       {
         day: 6,
         date: "2026/10/23 (週五)",
-        title: "神宮與北大銀杏 ‧ 諏訪神社賞花手水 ‧ 狸小路大採購之夜 🛍️",
+        title: "KKday 157133 專車一日遊 🚌 美瑛青池 ‧ 四季彩之丘 ‧ 白鬚瀑布 ‧ 森林精靈露台夜間點燈 🌌",
         hotel: "Sapporo View Hotel Odori Park",
         weather: {
-          area: "sapporo",
+          area: "biei",
           condition: "晴時多雲 ☀️⛅",
           tempHigh: "16°C",
-          tempLow: "6°C",
-          rainProb: "25%",
-          note: "tenki.jp：秋高氣爽，陽光舒適，非常適合拍攝北大銀杏並木與神社巡禮。",
-          tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1100/"
+          tempLow: "7°C",
+          rainProb: "20%",
+          note: "丘陵與山區清晨低溫接近 3~5°C，傍晚於森林精靈露台點燈時氣溫偏低，請攜帶防風禦寒外套。",
+          tenkiUrl: "https://tenki.jp/forecast/1/1/1200/1558/"
         },
         spots: [
           { 
-            id: "6-1", time: "09:30", stay: "01:30", name: "北海道神宮 & 六花亭神宮茶屋", category: "sightseeing", 
-            hours: "神宮 06:00 - 16:00; 六花亭茶屋 09:00 - 16:00", 
-            desc: "參拜幽靜的北海道第一大神宮，並至神宮內隱藏版「六花亭神宮茶屋」享用現場現烤的熱騰騰紅豆年糕「判官樣」。",
-            notes: "【必吃特色美食】六花亭神宮茶屋限定「判官樣 (判官さま)」現烤蕎麥紅豆餅 (外酥內軟軟糯！)", transit: { type: "train", duration: "00時25分" } 
+            id: "6-1", time: "11:00", stay: "00:10", name: "大通地鐵站 31號出口 (KKday 報到集合)", category: "train", 
+            hours: "11:00 集合 🚌 11:10 準時發車", 
+            desc: "提前 10 分鐘抵達大通地鐵站 31 號出口。尋找持 KKday / GOGODAY 黃旗子之導遊辦理報到，11:10 準時搭乘專車出發！",
+            notes: "【商品號 157133】請認明導遊與黃旗。逾時不候，請務必準時抵達！", transit: { type: "bus", duration: "02時20分" } 
           },
           { 
-            id: "6-2", time: "11:30", stay: "02:00", name: "北海道大學 (金黃銀杏並木 & 校園漫步 & 午餐)", category: "sightseeing", 
-            hours: "校園全天開放 (10月下旬為銀杏大道最美季節)", 
-            desc: "10 月下旬絕不能錯過的金黃「銀杏並木」！漫步古老歐風校園、榆樹林，午餐可享用校內食堂或周邊超人氣湯咖哩。",
-            notes: "【周邊美食】Picante 湯咖哩 / 北海道大學中央食堂 / Curry Di.SAVOY", transit: { type: "foot", duration: "00時10分" } 
+            id: "6-2", time: "13:30", stay: "00:30", name: "美瑛 白金青池 (Shiroi Koibito Pond)", category: "sightseeing", 
+            hours: "停留約 30 分鐘", 
+            desc: "打卡夢幻 Cobalt Blue 藍色水面「青池」，清澈寶藍池水與落葉松枯木倒影形成如仙境般的絕美自然奇觀。",
+            notes: "【拍照建議】順著木棧步道拍攝池水與落葉松枯木倒影，呈現寶藍色夢幻光澤", transit: { type: "bus", duration: "00時15分" } 
           },
           { 
-            id: "6-3", time: "13:40", stay: "01:00", name: "札幌諏訪神社 (賞美麗花手水 & 收集透明/蕾絲御守)", category: "sightseeing", 
-            hours: "社務所 09:00 - 17:00", 
-            desc: "從北大北側步行僅 8 分鐘！札幌超人氣爆紅神社，賞夢幻花手水池、領當月限定水彩御朱印與水晶透明/蕾絲御守。",
-            notes: "【特色收集】超美繽紛花手水、限定透明水晶御守、蕾絲刺繡御守、月替限定繪馬", transit: { type: "foot", duration: "00時15分" } 
+            id: "6-3", time: "14:15", stay: "00:20", name: "HERB GARDEN (貼心中途休息站)", category: "food", 
+            hours: "停留約 20 分鐘", 
+            desc: "位於美瑛與富良野間的香草庭園中途站，在此洗手休整、補充水份與購買在地小食洗滌搭車疲勞。",
+            notes: "【中途補給】貼心中途站，可採買在地乳製品或小點心續航", transit: { type: "bus", duration: "00時15分" } 
           },
           { 
-            id: "6-4", time: "15:00", stay: "01:30", name: "北海道廳舊本廳舍 (赤れんが庁舎) & 札幌時計台", category: "sightseeing", 
-            hours: "08:45 - 17:10", 
-            desc: "漫步參觀美麗巴洛克風格紅磚建築「赤れんが庁舎」與庭園秋景，隨後前往札幌地標「時計台」拍照留念。",
-            notes: "【拍照景點】紅磚廳舍銀杏庭園、時計台經典打卡點", transit: { type: "foot", duration: "00時10分" } 
+            id: "6-4", time: "14:50", stay: "01:00", name: "美瑛 四季彩之丘 (Shikisai no Oka)", category: "sightseeing", 
+            hours: "停留約 1 小時", 
+            desc: "擁有約 15 公頃廣闊丘陵花田！欣賞層層起伏的大地色彩，園內設有巨型稻草人，並可自費參觀羊駝牧場。",
+            notes: "【體驗亮點】起伏花田丘陵造景、巨大稻草人、可自費 (500日圓) 進入羊駝牧場餵食", transit: { type: "bus", duration: "00時20分" } 
           },
           { 
-            id: "6-5", time: "16:45", stay: "02:15", name: "狸小路商店街 & 站前百貨 (藥妝 & 伴手禮大採購)", category: "shopping", 
-            hours: "驚安殿堂 24 小時; 多數店家營業至 20:00~21:00", 
-            desc: "今晚是購物之夜！走訪狸小路 1~7 丁目與站前商圈，採買免稅藥妝、日系服飾、零食餅乾與土產伴手禮。",
-            notes: "【購物指南】驚安殿堂唐吉訶德、松本清、Sundrug 藥妝免稅採買", transit: { type: "foot", duration: "00時10分" } 
+            id: "6-5", time: "16:10", stay: "00:05", name: "雲霄飛車之路 (Roller Coaster Road)", category: "sightseeing", 
+            hours: "車覽約 5 分鐘", 
+            desc: "筆直延伸、高低起伏極大的連綿道路穿梭於美瑛丘陵間，車覽體驗如同乘坐雲霄飛車般的視覺震撼震撼！",
+            notes: "【景點特色】車覽行程不下車，於車上欣賞起伏丘陵大地風光", transit: { type: "bus", duration: "00時25分" } 
           },
           { 
-            id: "6-6", time: "19:00", stay: "02:00", name: "札幌市區晚餐三強備選 & 宵夜夜間芭菲 (シメパフェ)", category: "food", 
-            hours: "約 11:00 - 22:00 / 芭菲店 18:00 - 24:00", 
-            desc: "今晚提供三家極具特色的札幌在地經典名店作為選項，飯後還可體驗札幌獨特的宵夜夜間芭菲文化：",
-            notes: "【晚餐三大選項】1. できたて屋 時計台店（根室花まる旗下！現烤香噴噴一夜干魚定食與海鮮茶漬丼）/ 2. とんかつ玉藤 (玉藤豬排)（創業 70 年老店！大銅鍋炸熟成厚切三元豚豬排）/ 3. 十勝燒肉丼 (豚丼いっぴん / ぶたはげ)（醬香濃郁炭火燒烤厚切豬肉蓋飯）。【宵夜推薦】Parfaitteria PAL / Initial 甜點芭菲", transit: null 
+            id: "6-6", time: "16:40", stay: "00:30", name: "美瑛 白鬚瀑布 (10月替代富田農場景點)", category: "sightseeing", 
+            hours: "停留約 30 分鐘", 
+            desc: "10 月份因富田農場花況尾聲特別替換之優質景點！觀賞落差 30 公尺的壯麗白鬚瀑布，地下湧泉激起深藍綠色浪花。",
+            notes: "【10月限定替換】從鐵橋上方俯瞰藍色美瑛川溪谷與瀑布噴湧而下的震撼畫面", transit: { type: "bus", duration: "00時35分" } 
+          },
+          { 
+            id: "6-7", time: "17:45", stay: "01:00", name: "富良野 森林精靈露台 (Ningle Terrace 夜間浪漫點燈)", category: "sightseeing", 
+            hours: "10月限定延長停留約 60 分鐘 (傍晚點燈)", 
+            desc: "漫步位於森林裡的 15 座溫馨木造工坊。10 月份特別延長停留 60 分鐘，享受傍晚暖黃燈光點亮時，如同童話般的夢幻精靈村落！",
+            notes: "【夜間點燈美景】點燈後的小木屋溫暖步道極度夢幻，可選購在地精緻手作藝品", transit: { type: "bus", duration: "02時25分" } 
+          },
+          { 
+            id: "6-8", time: "21:10", stay: "01:30", name: "返抵大通站散團 ➡️ 晚餐：薄野和牛燒肉 / 熱騰騰拉麵", category: "food", 
+            hours: "約 21:10 抵達大通散團", 
+            desc: "專車安全送達大通站解散，結束豐富充實的一日遊！隨後可散步至薄野享用宵夜晚餐。",
+            notes: "【晚餐推薦】薄野日式烤肉居酒屋、信玄拉麵或夜間宵夜芭菲 (シメパフェ)", transit: null 
           }
         ]
       },
@@ -382,7 +383,7 @@
           tempHigh: "17°C",
           tempLow: "8°C",
           rainProb: "30%",
-          note: "tenki.jp：傍晚登上藻岩山山頂風大體感溫度約 3~5°C，請務必帶足厚外套與圍巾。",
+          note: "傍晚登上藻岩山山頂風大體感溫度約 3~5°C，請務必帶足厚外套與圍巾。",
           tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1100/"
         },
         spots: [
@@ -390,12 +391,12 @@
             id: "7-1", time: "09:30", stay: "01:00", name: "札幌護國神社 & 多賀神社 (中島公園旁)", category: "sightseeing", 
             hours: "社務所 09:00 - 16:00", 
             desc: "漫步美麗的中島公園秋景，參拜護國神社與多賀神社，收集極具質感的切繪御朱印與季節限定花卉御朱印。",
-            notes: "【特色收集】精緻切繪御朱印、緣結多賀神社御守、中島公園秋季楓紅", transit: { type: "bus", duration: "00時20分" } 
+            notes: "【特色收集】精緻切繪御朱印、緣結多賀神社御守、中島公園秋景", transit: { type: "bus", duration: "00時20分" } 
           },
           { 
             id: "7-2", time: "10:50", stay: "03:00", name: "札幌站前 / 大通百貨商圈購物 (大丸百貨 & Stellar Place & 午餐)", category: "shopping", 
             hours: "百貨 10:00 - 20:00 / 餐廳街 11:00 - 22:00", 
-            desc: "於札幌大丸百貨 (Daimaru) 與 Stellar Place 逛街採買精品、日系服飾與伴手禮，午餐可享用百貨美食街高人氣美食。",
+            desc: "於札幌大丸百貨 (Daimaru) 與 Stellar Place 購物採買精品、日系服飾與伴手禮，午餐可享用百貨美食街高人氣美食。",
             notes: "【必逛專櫃】大丸百貨甜點專區 (SNOW CHEESE / Kinotoya)、Stellar Place 美食街", transit: { type: "bus", duration: "00時30分" } 
           },
           { 
@@ -407,7 +408,7 @@
           { 
             id: "7-4", time: "16:15", stay: "02:00", name: "藻岩山纜車 (賞日落 Magic Hour & 日本新三大夜景)", category: "sightseeing", 
             hours: "10:30 - 22:00 (最後上山 21:30)", 
-            desc: "搭乘纜車登頂！從傍晚日落時分一直欣賞到夜晚璀璨如寶塑盒般的札幌市區夜景，浪漫至極。",
+            desc: "搭乘纜車登頂！從傍晚日落時分一直欣賞到夜晚璀璨如寶盒般的札幌市區夜景，浪漫至極。",
             notes: "【保暖提醒】山頂氣溫較低風大，請備妥厚外套！山頂設有幸福之鐘與展望台咖啡廳", transit: { type: "bus", duration: "00時30分" } 
           },
           { 
@@ -429,7 +430,7 @@
           tempHigh: "16°C",
           tempLow: "9°C",
           rainProb: "30%",
-          note: "tenki.jp：多雲天氣為主，當天主要於新千歲機場國內線室內採買，不受降雨影響。",
+          note: "當天主要於新千歲機場國內線室內採買，不受降雨影響。",
           tenkiUrl: "https://tenki.jp/forecast/1/2/1400/1100/"
         },
         spots: [
@@ -437,13 +438,13 @@
             id: "8-1", time: "09:30", stay: "00:45", name: "Sapporo View Hotel Odori Park ➡️ 新千歲機場", category: "train", 
             hours: "JR 列車每 12 分鐘一班", 
             desc: "辦理退房，前往札幌站搭乘 JR 快速 AirPort 列車直達新千歲機場。",
-            notes: "【JR 快速 AirPort 班次】建議班次：09:36 | 前後替代班次：09:24、09:48、10:00", transit: { type: "foot", duration: "00時10分" } 
+            notes: "【JR 快速 AirPort】建議班次：09:36 | 前後替代班次：09:24、09:48", transit: { type: "foot", duration: "00時10分" } 
           },
           { 
             id: "8-2", time: "10:30", stay: "01:30", name: "新千歲機場 國內線美食 & 美瑛選果 & 拉麵道場", category: "food", 
             hours: "國內線商店 06:30 - 20:30; 拉麵道場 09:00 - 21:00", 
             desc: "國內線是全日本最好逛的美食天堂！搶購美瑛選果現烤玉米麵包，並品嚐全日本聞名的濃郁甜蝦湯底拉麵與鮮奶霜淇淋。",
-            notes: "【必吃美食清單】1. 一幻蝦拉麵 (甜蝦濃郁湯頭) / 2. 美瑛選果現烤玉米麵包 (びえいのコーンパン) / 3. Kinotoya 極上牛乳霜淇淋", transit: { type: "foot", duration: "00時15分" } 
+            notes: "【必吃美食】1. 一幻蝦拉麵 / 2. 美瑛選果現烤玉米麵包 / 3. Kinotoya 極上牛乳霜淇淋", transit: { type: "foot", duration: "00時15分" } 
           },
           { 
             id: "8-3", time: "12:00", stay: "02:40", name: "新千歲機場 國際線 ✈️ 華航 CI131", category: "airport", 
@@ -459,18 +460,19 @@
     function App() {
       const [activeDay, setActiveDay] = React.useState(1);
       const [schedule, setSchedule] = React.useState(() => {
-        const saved = localStorage.getItem('hokkaido_travel_schedule_2026_v20');
+        const saved = localStorage.getItem('hokkaido_travel_schedule_2026_kk157133');
         return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
       });
       const [editingWeatherDay, setEditingWeatherDay] = React.useState(null);
+      const [isLoadingApi, setIsLoadingApi] = React.useState(false);
 
       React.useEffect(() => {
-        localStorage.setItem('hokkaido_travel_schedule_2026_v20', JSON.stringify(schedule));
+        localStorage.setItem('hokkaido_travel_schedule_2026_kk157133', JSON.stringify(schedule));
       }, [schedule]);
 
       const resetScheduleToDefault = () => {
         setSchedule(INITIAL_SCHEDULE);
-        localStorage.setItem('hokkaido_travel_schedule_2026_v20', JSON.stringify(INITIAL_SCHEDULE));
+        localStorage.setItem('hokkaido_travel_schedule_2026_kk157133', JSON.stringify(INITIAL_SCHEDULE));
       };
 
       const currentDayData = schedule.find(s => s.day === activeDay) || schedule[0];
@@ -499,6 +501,51 @@
         return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=${mode}`;
       };
 
+      const fetchLiveWeatherApi = async () => {
+        setIsLoadingApi(true);
+        try {
+          const areaCoords = {
+            sapporo: { lat: 43.0618, lon: 141.3545 },
+            otaru: { lat: 43.1907, lon: 140.9947 },
+            toya: { lat: 42.5800, lon: 140.8600 },
+            biei: { lat: 43.5905, lon: 142.4633 }
+          };
+
+          const coords = areaCoords[currentDayData.weather.area] || areaCoords.sapporo;
+          const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo`);
+          
+          if (!response.ok) throw new Error("API連線失敗");
+          const data = await response.json();
+
+          if (data && data.daily) {
+            const high = Math.round(data.daily.temperature_2m_max[0]) + "°C";
+            const low = Math.round(data.daily.temperature_2m_min[0]) + "°C";
+            const rain = (data.daily.precipitation_probability_max[0] || 25) + "%";
+            
+            const updated = schedule.map(dayObj => {
+              if (dayObj.day === activeDay) {
+                return {
+                  ...dayObj,
+                  weather: {
+                    ...dayObj.weather,
+                    tempHigh: high,
+                    tempLow: low,
+                    rainProb: rain,
+                    note: `[連線天氣同步完成] 預測最高溫 ${high} / 最低溫 ${low}，降雨機率 ${rain}。建議依即時狀況準備穿著。`
+                  }
+                };
+              }
+              return dayObj;
+            });
+            setSchedule(updated);
+          }
+        } catch (err) {
+          console.error("無法連線氣象數據:", err);
+        } finally {
+          setIsLoadingApi(false);
+        }
+      };
+
       const handleSaveWeather = (dayNum, newWeather) => {
         const updated = schedule.map(dayObj => {
           if (dayObj.day === dayNum) {
@@ -518,7 +565,6 @@
 
       return (
         <div className="min-h-screen bg-stone-100 text-stone-800 pb-20 font-sans">
-          {}
           <header className="bg-emerald-900 text-stone-100 shadow-md">
             <div className="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
               <div>
@@ -555,7 +601,6 @@
             </div>
           </div>
 
-          {}
           <div className="sticky top-0 z-30 bg-stone-100/95 backdrop-blur border-b border-stone-200 shadow-sm">
             <div className="max-w-3xl mx-auto px-2 flex overflow-x-auto py-2.5 no-scrollbar gap-1.5">
               {schedule.map((d) => (
@@ -575,7 +620,6 @@
             </div>
           </div>
 
-          {}
           <main className="max-w-3xl mx-auto px-4 pt-4">
             <div className="bg-white rounded-2xl p-4 shadow-sm border border-stone-200/80 mb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
@@ -591,7 +635,7 @@
               </div>
             </div>
 
-            {/* tenki.jp Weather Box */}
+            {/* tenki.jp & Live Weather Card */}
             {currentDayData.weather && (
               <div className="bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 rounded-2xl p-3.5 mb-4 shadow-xs">
                 <div className="flex items-center justify-between flex-wrap gap-2">
@@ -602,7 +646,7 @@
                     <span className="text-xs font-bold text-sky-900">{currentDayData.weather.condition}</span>
                   </div>
                   
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 flex-wrap">
                     <div className="text-xs text-sky-800 font-semibold">
                       <span>高溫 {currentDayData.weather.tempHigh} / 低溫 {currentDayData.weather.tempLow}</span>
                       <span className="ml-2 text-blue-700 bg-sky-100 px-1.5 py-0.5 rounded-full font-bold">降雨 {currentDayData.weather.rainProb}</span>
@@ -614,13 +658,21 @@
                       rel="noreferrer"
                       className="text-[11px] text-blue-600 hover:text-blue-800 underline font-medium flex items-center bg-white px-2 py-0.5 rounded-lg border border-sky-200 shadow-2xs"
                     >
-                      <span>tenki.jp 觀測</span>
-                      <ExternalLinkIcon className="w-3 h-3 ml-0.5" />
+                      <span>tenki.jp 觀測 ↗</span>
                     </a>
 
                     <button 
+                      onClick={fetchLiveWeatherApi}
+                      disabled={isLoadingApi}
+                      className="text-[11px] text-emerald-800 hover:text-emerald-900 font-medium flex items-center bg-emerald-100 hover:bg-emerald-200 px-2 py-0.5 rounded-lg border border-emerald-300 transition"
+                    >
+                      <RefreshIcon className={`w-3 h-3 mr-1 ${isLoadingApi ? 'animate-spin' : ''}`} />
+                      <span>{isLoadingApi ? '連線同步中...' : '⚡ 自動同步最新氣象'}</span>
+                    </button>
+
+                    <button 
                       onClick={() => setEditingWeatherDay(currentDayData)}
-                      className="text-[11px] text-amber-700 hover:text-amber-900 font-medium flex items-center bg-amber-100/80 hover:bg-amber-100 px-2 py-0.5 rounded-lg border border-amber-200 transition"
+                      className="text-[11px] text-amber-800 hover:text-amber-900 font-medium flex items-center bg-amber-100/90 hover:bg-amber-200 px-2 py-0.5 rounded-lg border border-amber-300 transition"
                     >
                       <EditIcon className="w-3 h-3 mr-0.5" />
                       <span>修改預報</span>
@@ -634,7 +686,6 @@
               </div>
             )}
 
-            {}
             <div className="space-y-4">
               {currentDayData.spots.map((spot, idx, array) => {
                 const badge = getCategoryBadge(spot.category);
